@@ -1,0 +1,344 @@
+package com.nitara.Treatment;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import com.nitara.CattleRegistration.RegisterBullCattle;
+import com.nitara.base.GenericBase;
+import com.nitara.utilities.ExcelUtils;
+import com.nitara.utilities.Helper;
+
+import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+
+public class AddTreatment extends GenericBase{
+
+	@Test(groups= {"Smoke", "Regression"})
+	public void addTreatment() throws IOException {
+
+		String abstractname = prop.getProperty("AddTreatment");
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String filepath = prop.getProperty("CattleOtherActivities");
+
+
+		RequestSpecification request = RestAssured.given();
+
+		//Read from excel to JSONObject
+		ExcelUtils data = new ExcelUtils();
+		JSONObject dataObject = data.readCase("AddTreatment","AddTreatmentwithValidData",filepath);
+
+		request.header("Authorization","Bearer " + token);
+		for (String key: dataObject.keySet()){
+			if((dataObject.get(key) instanceof String)) {
+				if((dataObject.getString(key)).matches("([^\\s]+(\\.(?i)(jpe?g|png|pdf))$)")) {
+					request.multiPart(key, new File(dataObject.getString(key)));}
+				else {
+					request.formParam(key, dataObject.get(key));}
+			}
+			else {
+				request.formParam(key, dataObject.get(key));
+			}
+		}
+
+		Response response = request.post(abstractname).then().extract().response();
+
+		//Print response
+		response.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals(200, response.getStatusCode());
+
+		//Validate success message
+		String jsonString = response.asString();
+		String  message = JsonPath.from(jsonString).get("message");
+		Assert.assertEquals("Treatment Data Added Successfully.", message);
+
+
+		//Verify the added details
+		ViewTreatmentData details = new ViewTreatmentData();
+		String res = details.viewTreatmentData(dataObject.getString("cattleId"), token);
+
+		//Parse json
+		JSONObject cattleDetails = new JSONObject(res);
+		JSONObject cattleTreatmentData = cattleDetails.getJSONObject("treatmentData");
+		JSONArray treatment = cattleTreatmentData.getJSONArray("treatments");
+		JSONObject obj = treatment.getJSONObject(0);
+
+		String date = dataObject.getString("dateOfVisit");
+		Assert.assertEquals(obj.getString("dateTime").contains(date), true);
+		Assert.assertEquals(dataObject.getString("disease"), obj.getString("disease"));
+		Assert.assertEquals(obj.getString("treatmentProofPath").isEmpty(),false);
+
+	}
+	
+	
+	public String addTreatment(String token) throws Exception {
+
+		String abstractname = prop.getProperty("AddTreatment");
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String filepath = prop.getProperty("CattleOtherActivities");
+
+		RegisterBullCattle cattle = new RegisterBullCattle();
+		cattle.registerBullCattle(token);
+		
+		RequestSpecification request = RestAssured.given();
+
+		//Read from excel to JSONObject
+		ExcelUtils data = new ExcelUtils();
+		JSONObject dataObject = data.readCase("AddTreatment","AddTreatmentwithValidData",filepath);
+
+		request.header("Authorization","Bearer " + token);
+		for (String key: dataObject.keySet()){
+			if((dataObject.get(key) instanceof String)) {
+				if((dataObject.getString(key)).matches("([^\\s]+(\\.(?i)(jpe?g|png|pdf))$)")) {
+					request.multiPart(key, new File(dataObject.getString(key)));}
+				else {
+					request.formParam(key, dataObject.get(key));}
+			}
+			else {
+				request.formParam(key, dataObject.get(key));
+			}
+		}
+
+		Response response = request.post(abstractname).then().extract().response();
+
+		//Print response
+		response.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals(200, response.getStatusCode());
+
+		//Validate success message
+		String jsonString = response.asString();
+		String  message = JsonPath.from(jsonString).get("message");
+		Assert.assertEquals("Treatment Data Added Successfully.", message);
+
+
+		//Verify the added details
+		ViewTreatmentData details = new ViewTreatmentData();
+		String res = details.viewTreatmentData(dataObject.getString("cattleId"), token);
+
+		//Parse json
+		JSONObject cattleDetails = new JSONObject(res);
+		JSONObject cattleTreatmentData = cattleDetails.getJSONObject("treatmentData");
+		JSONArray treatment = cattleTreatmentData.getJSONArray("treatments");
+		JSONObject obj = treatment.getJSONObject(0);
+
+		String date = dataObject.getString("dateOfVisit");
+		Assert.assertEquals(obj.getString("dateTime").contains(date), true);
+		Assert.assertEquals(dataObject.getString("disease"), obj.getString("disease"));
+		Assert.assertEquals(obj.getString("treatmentProofPath").isEmpty(),false);
+		
+		return jsonString;
+
+	}
+
+
+
+
+
+	@Test(groups= {"Regression"})
+	public void addTreatmentMandatoryField() throws Exception {
+
+		String abstractname = prop.getProperty("AddTreatment");
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String filepath = prop.getProperty("CattleOtherActivities");
+
+		RequestSpecification request = RestAssured.given();
+
+		request.header("Authorization","Bearer " + token);
+
+		Response response = request.post(abstractname).then().extract().response();
+
+		//Print response
+		response.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals(response.getStatusCode(),400);
+
+		///Assert error message
+		String jsonString = response.asString(); 
+		JSONObject res = new JSONObject(jsonString);
+		JSONObject error = res.getJSONObject("errors");
+
+
+		JSONArray obj = error.getJSONArray("Disease");
+		Assert.assertEquals(obj.getString(0),"The Disease field is required.");
+
+		obj = error.getJSONArray("CattleId");
+		Assert.assertEquals(obj.getString(0),"The CattleId field is required.");
+
+		obj = error.getJSONArray("Symptoms");
+		Assert.assertEquals(obj.getString(0),"The Symptoms field is required.");
+
+		obj = error.getJSONArray("Medicines");
+		Assert.assertEquals(obj.getString(0),"The Medicines field is required.");
+
+		obj = error.getJSONArray("DateOfVisit");
+		Assert.assertEquals(obj.getString(0),"The DateOfVisit field is required.");
+
+	}
+
+	//AddMedicineswithoutDosage
+
+	@Test(groups= {"Regression"})
+	public void addMedicineswithoutDosage() throws IOException {
+
+		String abstractname = prop.getProperty("AddTreatment");
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String filepath = prop.getProperty("CattleOtherActivities");
+
+
+		RequestSpecification request = RestAssured.given();
+		
+
+		//Read from excel to JSONObject
+		ExcelUtils data = new ExcelUtils();
+		JSONObject dataObject = data.readCase("AddTreatment","AddMedicineswithoutDosage",filepath);
+
+		request.header("Authorization","Bearer " + token);
+		for (String key: dataObject.keySet()){
+			if((dataObject.get(key) instanceof String)) {
+				if((dataObject.getString(key)).matches("([^\\s]+(\\.(?i)(jpe?g|png|pdf))$)")) {
+					request.multiPart(key, new File(dataObject.getString(key)));}
+				else {
+					request.formParam(key, dataObject.get(key));}
+			}
+			else {
+				request.formParam(key, dataObject.get(key));
+			}
+		}
+
+		Response response = request.post(abstractname).then().extract().response();
+
+		//Print response
+		response.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals( response.getStatusCode(),400);
+
+		///Assert error message
+		String jsonString = response.asString(); 
+		JSONObject res = new JSONObject(jsonString);
+		JSONObject error = res.getJSONObject("errors");
+
+
+		JSONArray obj = error.getJSONArray("Medicines[1].Unit");
+		Assert.assertEquals(obj.getString(0),"The Unit field is required.");
+
+		obj = error.getJSONArray("Medicines[1].Dosage");
+		Assert.assertEquals(obj.getString(0),"The Dosage field is required.");
+	}
+	
+	@Test(groups= {"Regression"})
+	public void followUpAfterRequired() throws Exception {
+
+		String abstractname = prop.getProperty("AddTreatment");
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String filepath = prop.getProperty("CattleOtherActivities");
+		
+
+		RegisterBullCattle cattle = new RegisterBullCattle();
+		cattle.registerBullCattle(token);
+
+
+		RequestSpecification request = RestAssured.given();
+
+		//Read from excel to JSONObject
+		ExcelUtils data = new ExcelUtils();
+		JSONObject dataObject = data.readCase("AddTreatment","FollowUpAfterRequired",filepath);
+
+		request.header("Authorization","Bearer " + token);
+		for (String key: dataObject.keySet()){
+			if((dataObject.get(key) instanceof String)) {
+				if((dataObject.getString(key)).matches("([^\\s]+(\\.(?i)(jpe?g|png|pdf))$)")) {
+					request.multiPart(key, new File(dataObject.getString(key)));}
+				else {
+					request.formParam(key, dataObject.get(key));}
+			}
+			else {
+				request.formParam(key, dataObject.get(key));
+			}
+		}
+
+		Response response = request.post(abstractname).then().extract().response();
+
+		//Print response
+		response.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals( response.getStatusCode(),400);
+
+		///Assert error message
+		String jsonString = response.asString(); 
+		JSONObject res = new JSONObject(jsonString);
+		JSONObject error = res.getJSONObject("errors");
+
+		JSONArray obj = error.getJSONArray("FollowupDays");
+		//Assert.assertEquals(obj.getString(0),"FollowupDays is required due to IsFollowupRequired being equal to True");
+
+	}
+	
+	//dateOfVisit
+	
+			
+			@Test(groups= {"Regression"})
+			public void addTreatmentFutureDate() throws Exception {
+
+				String abstractname = prop.getProperty("AddTreatment");
+				RestAssured.baseURI = prop.getProperty("baseurl");
+				String filepath = prop.getProperty("CattleOtherActivities");
+				
+
+				RegisterBullCattle cattle = new RegisterBullCattle();
+				cattle.registerBullCattle(token);
+
+
+				RequestSpecification request = RestAssured.given();
+
+				//Read from excel to JSONObject
+				ExcelUtils data = new ExcelUtils();
+				JSONObject dataObject = data.readCase("AddTreatment","AddTreatmentFutureDate",filepath);
+				
+				Helper date = new Helper();
+				request.formParam("dateOfVisit", date.getDate(1));
+
+
+				request.header("Authorization","Bearer " + token);
+				for (String key: dataObject.keySet()){
+					if((dataObject.get(key) instanceof String)) {
+						if((dataObject.getString(key)).matches("([^\\s]+(\\.(?i)(jpe?g|png|pdf))$)")) {
+							request.multiPart(key, new File(dataObject.getString(key)));}
+						else {
+							request.formParam(key, dataObject.get(key));}
+					}
+					else {
+						request.formParam(key, dataObject.get(key));
+					}
+				}
+
+				Response response = request.post(abstractname).then().extract().response();
+
+				//Print response
+				response.prettyPeek();
+
+				//Validate status code
+				Assert.assertEquals( response.getStatusCode(),400);
+
+				///Assert error message
+				String jsonString = response.asString(); 
+				JSONObject res = new JSONObject(jsonString);
+				JSONObject error = res.getJSONObject("errors");
+
+				JSONArray obj = error.getJSONArray("DateOfVisit");
+				//Assert.assertEquals(obj.getString(0),"FollowupDays is required due to IsFollowupRequired being equal to True");
+				Assert.assertEquals(obj.getString(0).contains("must not be greater than today"), true);
+			}
+}

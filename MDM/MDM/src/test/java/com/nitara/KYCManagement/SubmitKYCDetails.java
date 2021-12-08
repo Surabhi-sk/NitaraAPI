@@ -1,0 +1,111 @@
+package com.nitara.KYCManagement;
+
+import java.io.File;
+import java.io.IOException;
+import org.json.JSONObject;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import com.nitara.UserLogin.Login;
+import com.nitara.base.GenericBase;
+import com.nitara.utilities.ExcelUtils;
+import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+
+public class SubmitKYCDetails extends GenericBase{
+
+	@Test(groups= {"Smoke"})
+	public void submitKYCDetails() throws Exception {
+		String abstractname = prop.getProperty("SubmitKYCDetails");
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String filepath = prop.getProperty("AccountManagement");
+
+		RequestSpecification request = RestAssured.given();
+
+		ExcelUtils exceldata = new ExcelUtils();
+		JSONObject username = exceldata.readRowField("GeneralData", "username", filepath);
+		JSONObject password = exceldata.readRowField("GeneralData", "Password", filepath);
+
+		Login user = new Login();
+		String usertoken = user.userToken(username.getString("username"),password.getString("Password"));
+		JSONObject dataObject = exceldata.readData("SubmitKYCDetails",filepath);
+
+		request.header("Authorization","Bearer " + usertoken);
+		for (String key: dataObject.keySet()){
+			if((dataObject.get(key) instanceof String)) 
+				if((dataObject.getString(key)).contains(".jpg")) {
+					request.multiPart(key, new File(dataObject.getString(key)));}
+				else {
+					request.formParam(key, dataObject.get(key));
+					System.out.println( dataObject.get(key));
+				}
+			else {
+				request.formParam(key, dataObject.get(key));
+				System.out.println( dataObject.get(key));
+			}
+
+		}
+		Response response = request.post(abstractname).then().extract().response();
+
+		//Print response
+		response.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals(200, response.getStatusCode());
+
+		//Validate success message
+		String jsonString = response.asString();
+		String  message = JsonPath.from(jsonString).get("message");
+		Assert.assertEquals("KYC Details submitted.", message);
+
+
+		//Check Verification status
+		GetKycVerificationStatus kycStatus = new GetKycVerificationStatus();
+		String status = kycStatus.getKycVerificationStatus(usertoken);
+		String  verificationStatus = JsonPath.from(status).get("verificationStatus");
+		Assert.assertEquals("KYC verification is Pending", verificationStatus);
+
+	}
+
+	public void submitKYCDetails(String usertoken) throws IOException {
+		String abstractname = prop.getProperty("SubmitKYCDetails");
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String filepath = prop.getProperty("AccountManagement");
+
+		RequestSpecification request = RestAssured.given();
+
+		ExcelUtils exceldata = new ExcelUtils();
+
+		JSONObject dataObject = exceldata.readData("SubmitKYCDetails",filepath);
+
+		request.header("Authorization","Bearer " + usertoken);
+		for (String key: dataObject.keySet()){
+			if((dataObject.get(key) instanceof String)) 
+				if((dataObject.getString(key)).contains(".jpg")) {
+					request.multiPart(key, new File(dataObject.getString(key)));}
+				else {
+					request.formParam(key, dataObject.get(key));
+
+				}
+			else {
+				request.formParam(key, dataObject.get(key));
+
+			}
+
+		}
+		Response response = request.post(abstractname).then().extract().response();
+
+		//Print response
+		response.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals(200, response.getStatusCode());
+
+		String jsonString = response.asString();
+		String  message = JsonPath.from(jsonString).get("message");
+		//Validate success message
+		Assert.assertEquals("KYC Details submitted.", message);
+
+	}
+}

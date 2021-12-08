@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Smoke TestSuite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Smoke Testcases(failed)">
+    <groups>
+      <run>
+        <include name="Smoke"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="com.nitara.AccountManagement.GetActivityHistory">
+        <methods>
+          <include name="getUserAuthenticationToken"/>
+          <include name="getActivityHistory"/>
+        </methods>
+      </class> <!-- com.nitara.AccountManagement.GetActivityHistory -->
+      <class name="com.nitara.UserPreferenceManagement.SetUserServicesPreferences">
+        <methods>
+          <include name="SetServicesPreferences"/>
+          <include name="getUserAuthenticationToken"/>
+        </methods>
+      </class> <!-- com.nitara.UserPreferenceManagement.SetUserServicesPreferences -->
+      <class name="com.nitara.FollowUp.AddFollowUp">
+        <methods>
+          <include name="AddFollowUpDetails"/>
+          <include name="getUserAuthenticationToken"/>
+        </methods>
+      </class> <!-- com.nitara.FollowUp.AddFollowUp -->
+      <class name="com.nitara.UserPreferenceManagement.GetUserHealthPreferences">
+        <methods>
+          <include name="getUserAuthenticationToken"/>
+          <include name="getUserHealthPreferences"/>
+        </methods>
+      </class> <!-- com.nitara.UserPreferenceManagement.GetUserHealthPreferences -->
+      <class name="com.nitara.UserPreferenceManagement.SetUserMilkingPreferences">
+        <methods>
+          <include name="getUserAuthenticationToken"/>
+          <include name="setUserMilkingPreferences"/>
+        </methods>
+      </class> <!-- com.nitara.UserPreferenceManagement.SetUserMilkingPreferences -->
+      <class name="com.nitara.FollowUp.UpdateFollowUp">
+        <methods>
+          <include name="UpdateFollowUpDetails"/>
+          <include name="getUserAuthenticationToken"/>
+        </methods>
+      </class> <!-- com.nitara.FollowUp.UpdateFollowUp -->
+      <class name="com.nitara.FollowUp.DeleteFollowUp">
+        <methods>
+          <include name="deleteFollowUp"/>
+          <include name="getUserAuthenticationToken"/>
+        </methods>
+      </class> <!-- com.nitara.FollowUp.DeleteFollowUp -->
+      <class name="com.nitara.MasterData.GetUnitMasterData">
+        <methods>
+          <include name="GetUnitMasterDataInEnglish"/>
+          <include name="getUserAuthenticationToken"/>
+        </methods>
+      </class> <!-- com.nitara.MasterData.GetUnitMasterData -->
+      <class name="com.nitara.UserPreferenceManagement.GetUserInsurancePreferences">
+        <methods>
+          <include name="getUserInsurancePreferences"/>
+          <include name="getUserAuthenticationToken"/>
+        </methods>
+      </class> <!-- com.nitara.UserPreferenceManagement.GetUserInsurancePreferences -->
+    </classes>
+  </test> <!-- Smoke Testcases(failed) -->
+</suite> <!-- Failed suite [Smoke TestSuite] -->

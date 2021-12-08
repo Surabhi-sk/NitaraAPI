@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Regression TestSuite">
+<test name="Regression 1" preserve-order="true">
+<groups>  
+<run>  
+<include name="Regression"/>  
+</run>  
+</groups> 
+   <classes>
+   <class name="com.nitara.UserRegistration.UserRegistration"/>
+   <class name="com.nitara.UserLogin.LoginReg"/>
+   <class name="com.nitara.CattleRegistration.RegisterHeiferCattle"/>
+   <class name="com.nitara.CattleRegistration.RegisterCalfCattle"/>
+   <class name="com.nitara.CattleRegistration.RegisterMilkingOrDryCattle"/>
+   <class name="com.nitara.WeightManagement.AddWeightDirect"/>
+   <class name="com.nitara.WeightManagement.AddWeightByGirth"/>
+   <class name="com.nitara.WeightManagement.UpdateWeight"/>
+   <class name="com.nitara.WeightManagement.DeleteWeight"/> 
+   <class name="com.nitara.Treatment.AddTreatment"/>
+   <class name="com.nitara.Treatment.DeleteTreatment"/>
+   <class name="com.nitara.Treatment.UpdateTreatment"/>
+   <class name="com.nitara.Treatment.ViewTreatmentData"/>
+   <class name="com.nitara.VaccinationManagement.AddVaccination"/>
+    <class name="com.nitara.VaccinationManagement.UpdateVaccination"/>
+    <class name="com.nitara.VaccinationManagement.ViewVaccinationData"/>
+    <class name="com.nitara.VaccinationManagement.DeleteVaccination"/>
+    <class name="com.nitara.CattleManagement.AddInsurance"/>
+    </classes>
+ </test> <!-- Test -->
+</suite> <!-- Suite -->

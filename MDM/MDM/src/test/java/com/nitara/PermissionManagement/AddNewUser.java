@@ -1,0 +1,152 @@
+package com.nitara.PermissionManagement;
+
+import java.io.File;
+import java.util.Map;
+import org.json.JSONObject;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import com.nitara.UserLogin.Login;
+import com.nitara.base.GenericBase;
+import com.nitara.utilities.ExcelUtils;
+
+
+import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+
+public class AddNewUser extends GenericBase{
+
+	@Test(groups= {"Smoke"})
+	public void addNewUserDetails() throws Exception {
+
+		String abstractname = prop.getProperty("AddNewUser");
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String filepath = prop.getProperty("AccountManagement");
+		String regressionFilepath = prop.getProperty("RegressionData");
+
+		//read user name and password
+		ExcelUtils exceldata = new ExcelUtils();
+		//Update phone number in AccountManagement.xlsx
+		ExcelUtils var = new ExcelUtils();
+		String phoneNo = var.generateNo(10);
+		exceldata.writeStringData("GeneralData","phone",phoneNo, filepath);
+
+		JSONObject username = exceldata.readRowField("GeneralData", "username", filepath);
+		JSONObject password = exceldata.readRowField("GeneralData", "Password", filepath);
+
+
+		JSONObject farmhelpDetails = exceldata.readData("AddNewUser",filepath);
+
+		exceldata.writeStringData("GeneralData", "FarmHelpUsername", farmhelpDetails.getString("Phone"), filepath);
+		exceldata.writeStringData("GeneralData", "FarmHelpUsername", farmhelpDetails.getString("Phone"), regressionFilepath);
+
+		Login user = new Login();
+		String usertoken = user.userToken(username.getString("username"),password.getString("Password"));
+
+		RequestSpecification request = RestAssured.given();
+		request.header("Authorization","Bearer " + usertoken);
+		for (String key: farmhelpDetails.keySet()){
+			if((farmhelpDetails.get(key) instanceof String)) 
+				if((farmhelpDetails.getString(key)).contains(".jpg")) {
+					request.multiPart(key, new File(farmhelpDetails.getString(key)));}
+				else {
+					request.formParam(key, farmhelpDetails.get(key));
+				}
+			else {
+				request.formParam(key, farmhelpDetails.get(key));
+			}
+
+		}
+		Response res = request.post(abstractname).then().extract().response();
+
+		//Print response
+		res.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals(200, res.getStatusCode());
+
+
+
+		//Validate success message
+		String jsonString = res.asString();
+		String  message = JsonPath.from(jsonString).get("message");
+		Assert.assertEquals(message,"User Added Successfully.");
+
+
+		//Assert added details
+		GetUserDetails userDetails = new GetUserDetails();
+		String response = userDetails.getUserDetails(farmhelpDetails.getString("Phone"),usertoken);
+
+
+		Map<String, String> detail= JsonPath.from(response).getMap("userDetail");
+		String role = detail.get("farmRole");
+		Assert.assertEquals(role,farmhelpDetails.getString("FarmRole"));
+		Assert.assertEquals(detail.get("fullName"),farmhelpDetails.getString("FullName"));
+		Assert.assertEquals(detail.get("userImagePath").isEmpty(),false);
+		Assert.assertEquals(farmhelpDetails.getBoolean("CanViewMilkingModule"),detail.get("canViewMilkingModule"));
+		Assert.assertEquals(farmhelpDetails.getBoolean("CanEditMilkingModule"),detail.get("canEditMilkingModule"));
+		Assert.assertEquals(farmhelpDetails.getBoolean("CanViewBreedingModule"),detail.get("canViewBreedingModule"));
+		Assert.assertEquals(farmhelpDetails.getBoolean("CanEditBreedingModule"),detail.get("canEditBreedingModule"));
+		Assert.assertEquals(farmhelpDetails.getBoolean("CanViewFeedingModule"),detail.get("canViewFeedingModule"));
+		Assert.assertEquals(farmhelpDetails.getBoolean("CanEditFeedingModule"),detail.get("canEditFeedingModule"));
+		Assert.assertEquals(farmhelpDetails.getBoolean("CanViewHealthModule"),detail.get("canViewHealthModule"));
+		Assert.assertEquals(farmhelpDetails.getBoolean("CanEditHealthModule"),detail.get("canEditHealthModule"));
+
+		System.out.println("New user added.");
+	}
+
+
+	public String addNewUser(String token) throws Exception {
+
+		String abstractname = prop.getProperty("AddNewUser");
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String filepath = prop.getProperty("AccountManagement");
+
+		//read user name and password
+		ExcelUtils exceldata = new ExcelUtils();
+		JSONObject username = exceldata.readRowField("GeneralData", "username", filepath);
+		JSONObject password = exceldata.readRowField("GeneralData", "password", filepath);
+
+		//update Phone
+		exceldata.updateField("GeneralData",filepath,"phone"); 
+		JSONObject farmhelpDetails = exceldata.readData("AddNewUser",filepath);
+		System.out.println(farmhelpDetails);
+
+		Login user = new Login();
+		String usertoken = user.userToken(username.getString("username"),password.getString("password"));
+
+		RequestSpecification request = RestAssured.given();
+		request.header("Authorization","Bearer " + usertoken);
+		for (String key: farmhelpDetails.keySet()){
+			if((farmhelpDetails.get(key) instanceof String)) 
+				if((farmhelpDetails.getString(key)).contains(".jpg")) {
+					request.multiPart(key, new File(farmhelpDetails.getString(key)));}
+				else {
+					request.formParam(key, farmhelpDetails.get(key));
+				}
+			else {
+				request.formParam(key, farmhelpDetails.get(key));
+			}
+
+		}
+		Response res = request.post(abstractname).then().extract().response();
+
+		//Print response
+		res.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals(200, res.getStatusCode());
+
+
+		//Validate success message
+		String jsonString = res.asString();
+		String  message = JsonPath.from(jsonString).get("message");
+		Assert.assertEquals("User Added Successfully.", message);
+
+		return(farmhelpDetails.getString("Phone"));
+	}
+
+
+
+}

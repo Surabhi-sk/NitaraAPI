@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Regression TestSuite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Regression 1(failed)">
+    <groups>
+      <run>
+        <include name="Regression"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="com.nitara.BCSManagement.BCS">
+        <methods>
+          <include name="AddBcsDetailsWithin15days"/>
+          <include name="getUserAuthenticationToken"/>
+        </methods>
+      </class> <!-- com.nitara.BCSManagement.BCS -->
+    </classes>
+  </test> <!-- Regression 1(failed) -->
+</suite> <!-- Failed suite [Regression TestSuite] -->

@@ -1,0 +1,729 @@
+package com.nitara.CattleRegistration;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.Properties;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import com.nitara.FarmManagement.ViewFarmCattleList;
+import com.nitara.UserLogin.Login;
+import com.nitara.base.GenericBase;
+import com.nitara.service.NitaraService;
+import com.nitara.utilities.ExcelUtils;
+import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+
+/*User Story :Cattle registration 1872
+@Author : Ravi Teja
+ */
+
+
+public class RegisterCalfCattle extends GenericBase{
+	NitaraService results = new NitaraService();
+
+
+	@Test(groups= {"Smoke"})
+	public void registerCalf() throws Exception {
+
+		
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String abstractname = prop.getProperty("RegisterCalfCattle");
+		String filepath = prop.getProperty("Registration");
+		String external = prop.getProperty("AccountManagement");
+
+		ExcelUtils exceldata = new ExcelUtils();
+		
+		RequestSpecification request = RestAssured.given();
+		
+		//Update tag numbers in Registration.xlsx
+		ExcelUtils var = new ExcelUtils();
+		String TagNo = var.generateNo(8);
+		exceldata.writeStringData("GeneralData","TagNumber",TagNo, filepath);
+		String CoopNo = var.generateNo(12);
+		exceldata.writeStringData("GeneralData","CooperativeTagNumber",CoopNo, filepath);
+		JSONObject dataObject = exceldata.readCase("RegCalfCattle","RegisterCalfCattle",filepath,external);
+
+		request.header("Authorization","Bearer " + token);
+		for (String key: dataObject.keySet()){
+			if((dataObject.get(key) instanceof String)) 
+				if((dataObject.getString(key)).matches("([^\\s]+(\\.(?i)(jpe?g|png))$)")) {
+					System.out.println(dataObject.getString(key));
+					request.multiPart(key, new File(dataObject.getString(key)));}
+
+				else {
+					request.formParam(key, dataObject.get(key));
+				}
+			else {
+				request.formParam(key, dataObject.get(key));
+			}
+		}
+		Response res = request.post(abstractname).then().extract().response();
+
+		//Print response
+		res.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals( res.getStatusCode(),200);
+
+
+		//Validate success message
+		String jsonString = res.asString();	
+		String  message = JsonPath.from(jsonString).get("message");
+		Assert.assertEquals(message,"Cattle Registered successfully.");
+
+	}
+
+
+
+	public String registerCalf(String token) throws Exception {
+		
+		prop=new Properties();
+		FileInputStream fis=new FileInputStream("src\\main\\java\\com\\nitara\\config\\Config.properties");
+		prop.load(fis);
+
+		String abstractname = prop.getProperty("RegisterCalfCattle");
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String filepath = prop.getProperty("Registration");
+		String external = prop.getProperty("AccountManagement");
+
+		RequestSpecification request = RestAssured.given();
+
+		ExcelUtils exceldata = new ExcelUtils();
+
+		//Update tag numbers in Registration.xlsx
+		ExcelUtils var = new ExcelUtils();
+		String TagNo = var.generateNo(8);
+		exceldata.writeStringData("GeneralData","TagNumber",TagNo, filepath);
+		String CoopNo = var.generateNo(12);
+		exceldata.writeStringData("GeneralData","CooperativeTagNumber",CoopNo, filepath);
+
+		JSONObject dataObject = exceldata.readCase("RegCalfCattle","RegisterCalfCattle",filepath,external);
+		request.header("Authorization","Bearer " + token);
+		for (String key: dataObject.keySet()){
+			if((dataObject.get(key) instanceof String)) 
+				if((dataObject.getString(key)).contains(".jpg")) {
+					request.multiPart(key, new File(dataObject.getString(key)));}
+
+				else {
+					request.formParam(key, dataObject.get(key));
+				}
+			else {
+				request.formParam(key, dataObject.get(key));
+			}
+		}
+		Response res = request.post(abstractname).then().extract().response();
+
+		//Print response
+		res.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals(res.getStatusCode(), 200);
+
+
+		//Validate success message
+		String jsonString = res.asString();	
+		String  message = JsonPath.from(jsonString).get("message");
+		Assert.assertEquals("Cattle Registered successfully.", message);
+		String cattleId = JsonPath.from(jsonString).get("cattleId");
+		
+		return cattleId;
+	}
+
+
+	@Test(groups= {"Regression"})
+	public void Registerwithduplicatecotagnumber() throws Exception {
+
+
+		prop=new Properties();
+		FileInputStream fis=new FileInputStream("src\\main\\java\\com\\nitara\\config\\Config.properties");
+		prop.load(fis);
+		
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String abstractname = prop.getProperty("RegisterCalfCattle");
+		String filepath = prop.getProperty("RegressionData");
+		String external = prop.getProperty("AccountManagement");
+
+		ExcelUtils exceldata = new ExcelUtils();
+		JSONObject username = exceldata.readRowField("GeneralData", "username", external);
+		JSONObject password = exceldata.readRowField("GeneralData", "Password", external);
+
+		Login user = new Login();
+		String usertoken = user.userToken(username.getString("username"),password.getString("Password"));
+		RequestSpecification request = RestAssured.given();
+
+		JSONObject dataObject = exceldata.readCase("RegisterCalf","Registerwithduplicatecotagnumber",filepath);
+
+		request.header("Authorization","Bearer " + usertoken);
+		for (String key: dataObject.keySet()){
+			if((dataObject.get(key) instanceof String)) 
+				if((dataObject.getString(key)).contains(".jpg")) {
+					request.multiPart(key, new File(dataObject.getString(key)));}
+
+				else {
+					request.formParam(key, dataObject.get(key));
+				}
+			else {
+				request.formParam(key, dataObject.get(key));
+			}
+		}
+		Response res = request.post(abstractname).then().extract().response();
+
+		//Print response
+		res.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals( res.getStatusCode(),400);
+
+		/*	//Validate success message
+				String jsonString = res.asString();	
+				String  message = JsonPath.from(jsonString).get("message");
+				Assert.assertEquals("Cooperative Number already exists.", message);
+
+		//Assert error message
+		String jsonString = res.asString(); 
+		JSONObject response = new JSONObject(jsonString);
+		JSONObject error = response.getJSONObject("errors");
+
+		Assert.assertEquals(error.length(),1);
+
+		JSONArray tag = error.getJSONArray("TagNumber");
+		Assert.assertEquals("Cooperative Number already exists.", tag.getString(0));*/
+
+
+	}
+
+	@Test(groups= {"Regression"})
+	public void Registerwithduplicatetagnumber() throws Exception {
+
+
+		prop=new Properties();
+		FileInputStream fis=new FileInputStream("src\\main\\java\\com\\nitara\\config\\Config.properties");
+		prop.load(fis);
+		
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String abstractname = prop.getProperty("RegisterCalfCattle");
+		String filepath = prop.getProperty("RegressionData");
+		String external = prop.getProperty("AccountManagement");
+
+		ExcelUtils exceldata = new ExcelUtils();
+		JSONObject username = exceldata.readRowField("GeneralData", "username", external);
+		JSONObject password = exceldata.readRowField("GeneralData", "Password", external);
+
+		Login user = new Login();
+		String usertoken = user.userToken(username.getString("username"),password.getString("Password"));
+		RequestSpecification request = RestAssured.given();
+
+		JSONObject dataObject = exceldata.readCase("RegisterCalf","Registerwithduplicatetagnumber",filepath);
+
+		request.header("Authorization","Bearer " + usertoken);
+		for (String key: dataObject.keySet()){
+			if((dataObject.get(key) instanceof String)) 
+				if((dataObject.getString(key)).contains(".jpg")) {
+					request.multiPart(key, new File(dataObject.getString(key)));}
+
+				else {
+					request.formParam(key, dataObject.get(key));
+				}
+			else {
+				request.formParam(key, dataObject.get(key));
+			}
+		}
+		Response res = request.post(abstractname).then().extract().response();
+
+		//Print response
+		res.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals( res.getStatusCode(),400);
+
+		/*//Validate  message
+				String jsonString = res.asString();	
+				String  message = JsonPath.from(jsonString).get("message");
+				Assert.assertEquals( "Tag Number already exists.", message);
+
+		//Assert error message
+		String jsonString = res.asString(); 
+		JSONObject response = new JSONObject(jsonString);
+		JSONObject error = response.getJSONObject("errors");
+
+		Assert.assertEquals(error.length(),1);
+
+		JSONArray tag = error.getJSONArray("TagNumber");
+		Assert.assertEquals("Cooperative Number already exists.", tag.getString(0));*/
+	}
+
+	@Test(groups= {"Regression"})
+	public void Registerwithemptytagnumber() throws Exception {
+
+
+		prop=new Properties();
+		FileInputStream fis=new FileInputStream("src\\main\\java\\com\\nitara\\config\\Config.properties");
+		prop.load(fis);
+		
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String abstractname = prop.getProperty("RegisterCalfCattle");
+		String filepath = prop.getProperty("RegressionData");
+		String external = prop.getProperty("AccountManagement");
+
+		ExcelUtils exceldata = new ExcelUtils();
+		JSONObject username = exceldata.readRowField("GeneralData", "username", external);
+		JSONObject password = exceldata.readRowField("GeneralData", "Password", external);
+
+		Login user = new Login();
+		String usertoken = user.userToken(username.getString("username"),password.getString("Password"));
+		RequestSpecification request = RestAssured.given();
+
+		JSONObject dataObject = exceldata.readCase("RegisterCalf","Registerwithemptytagnumber",filepath);
+
+		request.header("Authorization","Bearer " + usertoken);
+		for (String key: dataObject.keySet()){
+			if((dataObject.get(key) instanceof String)) 
+				if((dataObject.getString(key)).contains(".jpg")) {
+					request.multiPart(key, new File(dataObject.getString(key)));}
+
+				else {
+					request.formParam(key, dataObject.get(key));
+				}
+			else {
+				request.formParam(key, dataObject.get(key));
+			}
+		}
+		Response res = request.post(abstractname).then().extract().response();
+
+		//Print response
+		res.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals( res.getStatusCode(),400);
+
+		/*//Validate  message
+				String jsonString = res.asString();	
+				String  message = JsonPath.from(jsonString).get("message");
+				Assert.assertEquals( "Tag Number already exists.", message);
+
+		//Assert error message
+		String jsonString = res.asString(); 
+		JSONObject response = new JSONObject(jsonString);
+		JSONObject error = response.getJSONObject("errors");
+
+		Assert.assertEquals(error.length(),1);
+
+		JSONArray tag = error.getJSONArray("TagNumber");
+		Assert.assertEquals("Cooperative Number already exists.", tag.getString(0));*/
+	}
+
+	@Test(groups= {"Regression"})
+	public void Registerwithoutyearofbirth() throws Exception {
+
+
+		prop=new Properties();
+		FileInputStream fis=new FileInputStream("src\\main\\java\\com\\nitara\\config\\Config.properties");
+		prop.load(fis);
+		
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String abstractname = prop.getProperty("RegisterCalfCattle");
+		String filepath = prop.getProperty("RegressionData");
+		String external = prop.getProperty("AccountManagement");
+
+		ExcelUtils exceldata = new ExcelUtils();
+		JSONObject username = exceldata.readRowField("GeneralData", "username", external);
+		JSONObject password = exceldata.readRowField("GeneralData", "Password", external);
+
+		Login user = new Login();
+		String usertoken = user.userToken(username.getString("username"),password.getString("Password"));
+		RequestSpecification request = RestAssured.given();
+
+		JSONObject dataObject = exceldata.readCase("RegisterCalf","Registerwithoutyearofbirth",filepath);
+
+		request.header("Authorization","Bearer " + usertoken);
+		for (String key: dataObject.keySet()){
+			if((dataObject.get(key) instanceof String)) 
+				if((dataObject.getString(key)).contains(".jpg")) {
+					request.multiPart(key, new File(dataObject.getString(key)));}
+
+				else {
+					request.formParam(key, dataObject.get(key));
+				}
+			else {
+				request.formParam(key, dataObject.get(key));
+			}
+		}
+		Response res = request.post(abstractname).then().extract().response();
+
+		//Print response
+		res.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals( res.getStatusCode(),400);
+
+		/*//Validate  message
+				String jsonString = res.asString();	
+				String  message = JsonPath.from(jsonString).get("message");
+				Assert.assertEquals( "Tag Number already exists.", message);
+
+		//Assert error message
+		String jsonString = res.asString(); 
+		JSONObject response = new JSONObject(jsonString);
+		JSONObject error = response.getJSONObject("errors");
+
+		Assert.assertEquals(error.length(),1);
+
+		JSONArray tag = error.getJSONArray("TagNumber");
+		Assert.assertEquals("Cooperative Number already exists.", tag.getString(0));*/
+	}
+
+
+	@Test(groups= {"Regression"})
+	public void Registerwithoutphotos() throws Exception {
+
+
+		prop=new Properties();
+		FileInputStream fis=new FileInputStream("src\\main\\java\\com\\nitara\\config\\Config.properties");
+		prop.load(fis);
+		
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String abstractname = prop.getProperty("RegisterCalfCattle");
+		String filepath = prop.getProperty("RegressionData");
+		String external = prop.getProperty("AccountManagement");
+
+		ExcelUtils exceldata = new ExcelUtils();
+		JSONObject username = exceldata.readRowField("GeneralData", "username", external);
+		JSONObject password = exceldata.readRowField("GeneralData", "Password", external);
+
+		Login user = new Login();
+		String usertoken = user.userToken(username.getString("username"),password.getString("Password"));
+		RequestSpecification request = RestAssured.given();
+
+		JSONObject dataObject = exceldata.readCase("RegisterCalf","Registerwithoutphotos",filepath);
+
+		request.header("Authorization","Bearer " + usertoken);
+		for (String key: dataObject.keySet()){
+			if((dataObject.get(key) instanceof String)) 
+				if((dataObject.getString(key)).contains(".jpg")) {
+					request.multiPart(key, new File(dataObject.getString(key)));}
+
+				else {
+					request.formParam(key, dataObject.get(key));
+				}
+			else {
+				request.formParam(key, dataObject.get(key));
+			}
+		}
+		Response res = request.post(abstractname).then().extract().response();
+		System.out.print(dataObject);
+		//Print response
+		res.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals( res.getStatusCode(),400);
+
+		/*//Validate  message
+				String jsonString = res.asString();	
+				String  message = JsonPath.from(jsonString).get("message");
+				Assert.assertEquals( "", message);
+
+		//Assert error message
+		String jsonString = res.asString(); 
+		JSONObject response = new JSONObject(jsonString);
+		JSONObject error = response.getJSONObject("errors");
+
+		Assert.assertEquals(error.length(),1);
+
+		JSONArray tag = error.getJSONArray("TagNumber");
+		Assert.assertEquals("Cooperative Number already exists.", tag.getString(0));*/
+	}
+
+
+	/*@Test(groups= {"Regression"})
+	public void Registerwithinvalidfileformat() throws Exception {
+
+		String abstractname = prop.getProperty("RegisterCalfCattle");
+		RestAssured.baseURI = prop.getProperty("baseurl");
+	//	String filepath = prop.getProperty("Registration");
+		String external = prop.getProperty("AccountManagement");
+		String filepath = prop.getProperty("RegressionData");
+
+		RequestSpecification request = RestAssured.given();
+
+		ExcelUtils exceldata = new ExcelUtils();
+		//Update Tags
+		//exceldata.updateField("RegCalfCattle",filepath,"tagNumber"); 
+	//	exceldata.updateField("RegCalfCattle",filepath,"cooperativeTagNumber"); 
+		JSONObject dataObject = exceldata.readCase("RegisterCalf","Registerwithinvalidfileformat",filepath);
+
+		request.header("Authorization","Bearer " + token);
+		for (String key: dataObject.keySet()){
+			if((dataObject.get(key) instanceof String)) 
+				if((dataObject.getString(key)).contains(".jpg")) {
+					request.multiPart(key, new File(dataObject.getString(key)));}
+
+				else {
+					request.formParam(key, dataObject.get(key));
+				}
+			else {
+				request.formParam(key, dataObject.get(key));
+			}
+		}
+		Response res = request.post(abstractname).then().extract().response();
+
+		//Print response
+		res.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals(400, res.getStatusCode());
+
+		//Validate  message
+				String jsonString = res.asString();	
+				String  message = JsonPath.from(jsonString).get("message");
+				Assert.assertEquals( "Tag Number already exists.", message);
+
+		//Assert error message
+		String jsonString = res.asString(); 
+		JSONObject response = new JSONObject(jsonString);
+		JSONObject error = response.getJSONObject("errors");
+
+		Assert.assertEquals(error.length(),1);
+
+		JSONArray tag = error.getJSONArray("TagNumber");
+		Assert.assertEquals("Cooperative Number already exists.", tag.getString(0));
+	}*/
+
+
+	@Test(groups= {"Regression"})
+	public void Registerwithlessthan6monthsofage() throws Exception {
+
+
+		prop=new Properties();
+		FileInputStream fis=new FileInputStream("src\\main\\java\\com\\nitara\\config\\Config.properties");
+		prop.load(fis);
+		
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String abstractname = prop.getProperty("RegisterCalfCattle");
+		String filepath = prop.getProperty("RegressionData");
+		String external = prop.getProperty("AccountManagement");
+
+		ExcelUtils exceldata = new ExcelUtils();
+		JSONObject username = exceldata.readRowField("GeneralData", "username", external);
+		JSONObject password = exceldata.readRowField("GeneralData", "Password", external);
+
+		Login user = new Login();
+		String usertoken = user.userToken(username.getString("username"),password.getString("Password"));
+		RequestSpecification request = RestAssured.given();
+
+		JSONObject dataObject = exceldata.readCase("RegisterCalf","Registerwithlessthan6monthsofage",filepath);
+
+		request.header("Authorization","Bearer " + usertoken);
+		for (String key: dataObject.keySet()){
+			if((dataObject.get(key) instanceof String)) 
+				if((dataObject.getString(key)).contains(".jpg")) {
+					request.multiPart(key, new File(dataObject.getString(key)));}
+
+				else {
+					request.formParam(key, dataObject.get(key));
+				}
+			else {
+				request.formParam(key, dataObject.get(key));
+			}
+		}
+		Response res = request.post(abstractname).then().extract().response();
+		System.err.println(dataObject);
+		//Print response
+		res.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals( res.getStatusCode(),400);
+		/*//Validate  message
+				String jsonString = res.asString();	
+				String  message = JsonPath.from(jsonString).get("message");
+				Assert.assertEquals( "Tag Number already exists.", message);
+
+		//Assert error message
+		String jsonString = res.asString(); 
+		JSONObject response = new JSONObject(jsonString);
+		JSONObject error = response.getJSONObject("errors");
+
+		Assert.assertEquals(error.length(),1);
+
+		JSONArray tag = error.getJSONArray("MinimumAge");
+		Assert.assertEquals("Calf cannot be more than 6 months of age.", tag.getString(0));*/
+	}
+
+
+	@Test(groups= {"Regression"})
+	public void Registerwithfutureyearofbirth() throws Exception {
+
+
+		prop=new Properties();
+		FileInputStream fis=new FileInputStream("src\\main\\java\\com\\nitara\\config\\Config.properties");
+		prop.load(fis);
+		
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String abstractname = prop.getProperty("RegisterCalfCattle");
+		String filepath = prop.getProperty("RegressionData");
+		String external = prop.getProperty("AccountManagement");
+
+		ExcelUtils exceldata = new ExcelUtils();
+		JSONObject username = exceldata.readRowField("GeneralData", "username", external);
+		JSONObject password = exceldata.readRowField("GeneralData", "Password", external);
+
+		Login user = new Login();
+		String usertoken = user.userToken(username.getString("username"),password.getString("Password"));
+		RequestSpecification request = RestAssured.given();
+
+		JSONObject dataObject = exceldata.readCase("RegisterCalf","Registerwithfutureyearofbirth",filepath);
+
+		request.header("Authorization","Bearer " + usertoken);
+		for (String key: dataObject.keySet()){
+			if((dataObject.get(key) instanceof String)) 
+				if((dataObject.getString(key)).contains(".jpg")) {
+					request.multiPart(key, new File(dataObject.getString(key)));}
+
+				else {
+					request.formParam(key, dataObject.get(key));
+				}
+			else {
+				request.formParam(key, dataObject.get(key));
+			}
+		}
+		Response res = request.post(abstractname).then().extract().response();
+
+		//Print response
+		res.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals( res.getStatusCode(),400);
+
+		/*//Validate  message
+				String jsonString = res.asString();	
+				String  message = JsonPath.from(jsonString).get("message");
+				Assert.assertEquals( "Tag Number already exists.", message);
+
+		//Assert error message
+		String jsonString = res.asString(); 
+		JSONObject response = new JSONObject(jsonString);
+		JSONObject error = response.getJSONObject("errors");
+
+		Assert.assertEquals(error.length(),1);
+
+		JSONArray tag = error.getJSONArray("TagNumber");
+		Assert.assertEquals("Cooperative Number already exists.", tag.getString(0));*/
+	}
+
+
+	@Test(groups= {"Regression"})
+	public void Registerwithmorethan25yearsofage() throws Exception {
+
+
+		prop=new Properties();
+		FileInputStream fis=new FileInputStream("src\\main\\java\\com\\nitara\\config\\Config.properties");
+		prop.load(fis);
+		
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String abstractname = prop.getProperty("RegisterCalfCattle");
+		String filepath = prop.getProperty("RegressionData");
+		String external = prop.getProperty("AccountManagement");
+
+		ExcelUtils exceldata = new ExcelUtils();
+		JSONObject username = exceldata.readRowField("GeneralData", "username", external);
+		JSONObject password = exceldata.readRowField("GeneralData", "Password", external);
+
+		Login user = new Login();
+		String usertoken = user.userToken(username.getString("username"),password.getString("Password"));
+		RequestSpecification request = RestAssured.given();
+ 
+		JSONObject dataObject = exceldata.readCase("RegisterCalf","Registerwithmorethan25yearsofage",filepath);
+
+		request.header("Authorization","Bearer " + usertoken);
+		for (String key: dataObject.keySet()){
+			if((dataObject.get(key) instanceof String)) 
+				if((dataObject.getString(key)).contains(".jpg")) {
+					request.multiPart(key, new File(dataObject.getString(key)));}
+
+				else {
+					request.formParam(key, dataObject.get(key));
+				}
+			else {
+				request.formParam(key, dataObject.get(key));
+			}
+		}
+		Response res = request.post(abstractname).then().extract().response();
+
+		//Print response
+		res.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals( res.getStatusCode(),400);
+
+		/*//Validate  message
+				String jsonString = res.asString();	
+				String  message = JsonPath.from(jsonString).get("message");
+				Assert.assertEquals( "Tag Number already exists.", message);
+
+		//Assert error message
+		String jsonString = res.asString(); 
+		JSONObject response = new JSONObject(jsonString);
+		JSONObject error = response.getJSONObject("errors");
+
+		Assert.assertEquals(error.length(),3);
+
+		JSONArray tag = error.getJSONArray("MinimumAge");
+		Assert.assertEquals("Calf cannot be more than 6 months of age.", tag.getString(0));*/
+	}
+
+
+	@Test(groups= {"Regression"})
+	public void Cooperativenumbershouldbe12digits() throws Exception {
+
+
+		prop=new Properties();
+		FileInputStream fis=new FileInputStream("src\\main\\java\\com\\nitara\\config\\Config.properties");
+		prop.load(fis);
+		
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String abstractname = prop.getProperty("RegisterCalfCattle");
+		String filepath = prop.getProperty("RegressionData");
+		String external = prop.getProperty("AccountManagement");
+
+		ExcelUtils exceldata = new ExcelUtils();
+		JSONObject username = exceldata.readRowField("GeneralData", "username", external);
+		JSONObject password = exceldata.readRowField("GeneralData", "Password", external);
+
+		Login user = new Login();
+		String usertoken = user.userToken(username.getString("username"),password.getString("Password"));
+		RequestSpecification request = RestAssured.given();
+ 
+		JSONObject dataObject = exceldata.readCase("RegisterCalf","Cooperativenumbershouldbe12digits",filepath);
+
+		request.header("Authorization","Bearer " + usertoken);
+		for (String key: dataObject.keySet()){
+			if((dataObject.get(key) instanceof String)) 
+				if((dataObject.getString(key)).contains(".jpg")) {
+					request.multiPart(key, new File(dataObject.getString(key)));}
+
+				else {
+					request.formParam(key, dataObject.get(key));
+				}
+			else {
+				request.formParam(key, dataObject.get(key));
+			}
+		}
+		Response res = request.post(abstractname).then().extract().response();
+
+		//Print response
+		res.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals(400, res.getStatusCode());
+
+	}
+
+
+
+
+}

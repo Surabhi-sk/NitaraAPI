@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Failed suite [Smoke TestSuite]]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Smoke Testcases(failed)(failed)">
+    <groups>
+      <run>
+        <include name="Smoke"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="com.nitara.DryPeriodManagement.UpdateDryPeriod">
+        <methods>
+          <include name="addDryPeriod"/>
+          <include name="getUserAuthenticationToken"/>
+        </methods>
+      </class> <!-- com.nitara.DryPeriodManagement.UpdateDryPeriod -->
+      <class name="com.nitara.FollowUp.DeleteFollowUp">
+        <methods>
+          <include name="deleteFollowUp"/>
+          <include name="getUserAuthenticationToken"/>
+        </methods>
+      </class> <!-- com.nitara.FollowUp.DeleteFollowUp -->
+      <class name="com.nitara.MilkingManagement.AddFarmMilking">
+        <methods>
+          <include name="addUserFarmMilking"/>
+          <include name="getUserAuthenticationToken"/>
+        </methods>
+      </class> <!-- com.nitara.MilkingManagement.AddFarmMilking -->
+      <class name="com.nitara.UserPreferenceManagement.SetUserBreedingPreferences">
+        <methods>
+          <include name="getUserAuthenticationToken"/>
+          <include name="SetBreedingPreferences"/>
+        </methods>
+      </class> <!-- com.nitara.UserPreferenceManagement.SetUserBreedingPreferences -->
+      <class name="com.nitara.FollowUp.UpdateFollowUp">
+        <methods>
+          <include name="UpdateFollowUpDetails"/>
+          <include name="getUserAuthenticationToken"/>
+        </methods>
+      </class> <!-- com.nitara.FollowUp.UpdateFollowUp -->
+      <class name="com.nitara.KYCManagement.RejectKYCDetails">
+        <methods>
+          <include name="rejectKYCDetails"/>
+          <include name="getUserAuthenticationToken"/>
+        </methods>
+      </class> <!-- com.nitara.KYCManagement.RejectKYCDetails -->
+      <class name="com.nitara.UserPreferenceManagement.SetUserHealthPreferences">
+        <methods>
+          <include name="getUserAuthenticationToken"/>
+          <include name="SetHealthPreferences"/>
+        </methods>
+      </class> <!-- com.nitara.UserPreferenceManagement.SetUserHealthPreferences -->
+      <class name="com.nitara.FollowUp.AddFollowUp">
+        <methods>
+          <include name="AddFollowUpDetails"/>
+          <include name="getUserAuthenticationToken"/>
+        </methods>
+      </class> <!-- com.nitara.FollowUp.AddFollowUp -->
+      <class name="com.nitara.CattleManagement.AddBcs">
+        <methods>
+          <include name="getUserAuthenticationToken"/>
+          <include name="addBcsDetails"/>
+        </methods>
+      </class> <!-- com.nitara.CattleManagement.AddBcs -->
+      <class name="com.nitara.PDManagement.UpdatePD">
+        <methods>
+          <include name="updatePD"/>
+          <include name="getUserAuthenticationToken"/>
+        </methods>
+      </class> <!-- com.nitara.PDManagement.UpdatePD -->
+      <class name="com.nitara.DiseasePredictor.GetSymptoms">
+        <methods>
+          <include name="getUserAuthenticationToken"/>
+          <include name="GetSymptoms"/>
+        </methods>
+      </class> <!-- com.nitara.DiseasePredictor.GetSymptoms -->
+      <class name="com.nitara.KYCManagement.SubmitKYCDetails">
+        <methods>
+          <include name="submitKYCDetails"/>
+          <include name="getUserAuthenticationToken"/>
+        </methods>
+      </class> <!-- com.nitara.KYCManagement.SubmitKYCDetails -->
+      <class name="com.nitara.PDManagement.AddPD">
+        <methods>
+          <include name="addPD"/>
+          <include name="getUserAuthenticationToken"/>
+        </methods>
+      </class> <!-- com.nitara.PDManagement.AddPD -->
+      <class name="com.nitara.HeatManagement.DeleteHeat">
+        <methods>
+          <include name="deleteHeat"/>
+          <include name="getUserAuthenticationToken"/>
+        </methods>
+      </class> <!-- com.nitara.HeatManagement.DeleteHeat -->
+      <class name="com.nitara.CattleManagement.UpdateTreatment">
+        <methods>
+          <include name="getUserAuthenticationToken"/>
+          <include name="updateTreatment"/>
+        </methods>
+      </class> <!-- com.nitara.CattleManagement.UpdateTreatment -->
+      <class name="com.nitara.CalvingManagement.UpdateCalving">
+        <methods>
+          <include name="updateCalving"/>
+          <include name="getUserAuthenticationToken"/>
+        </methods>
+      </class> <!-- com.nitara.CalvingManagement.UpdateCalving -->
+      <class name="com.nitara.InseminationManagement.UpdateInsemination">
+        <methods>
+          <include name="getUserAuthenticationToken"/>
+          <include name="updateInsemination"/>
+        </methods>
+      </class> <!-- com.nitara.InseminationManagement.UpdateInsemination -->
+    </classes>
+  </test> <!-- Smoke Testcases(failed)(failed) -->
+</suite> <!-- Failed suite [Failed suite [Smoke TestSuite]] -->

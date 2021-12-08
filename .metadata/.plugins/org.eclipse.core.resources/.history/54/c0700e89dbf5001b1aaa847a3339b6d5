@@ -1,0 +1,90 @@
+package com.nitara.MilkingManagement;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import com.nitara.UserLogin.Login;
+import com.nitara.UserPreferenceManagement.SetUserMilkingPreferences;
+import com.nitara.base.GenericBase;
+import com.nitara.service.NitaraService;
+import com.nitara.utilities.ExcelUtils;
+
+import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+public class AddCattleMilking extends GenericBase
+{
+	NitaraService results = new NitaraService();
+
+	@Test(groups= {"Smoke"})
+	public void addCattleMilking() throws Exception 
+	{
+		String abstractname = prop.getProperty("AddCattleMilking");
+		RestAssured.baseURI = prop.getProperty("baseurl"); 
+		String filepath = prop.getProperty("AccountManagement");
+
+		//read user name and password
+		ExcelUtils exceldata = new ExcelUtils();
+		JSONObject username = exceldata.readRowField("GeneralData", "username", filepath);
+		JSONObject password = exceldata.readRowField("GeneralData", "Password", filepath);
+
+		Login user = new Login();
+		String usertoken = user.userToken(username.getString("username"),password.getString("Password"));
+
+		SetUserMilkingPreferences userPref = new SetUserMilkingPreferences();
+		userPref.setUserMilkingPreferences("Cattle",usertoken);
+
+		filepath = prop.getProperty("CattleBreedingData");
+		JSONObject cattle = exceldata.readRowField("GeneralData", "CattleId", filepath);
+		JSONObject lact = exceldata.readRowField("GeneralData","Lactation",filepath);
+		
+		String cattleId = cattle.getString("CattleId");
+		int lactation = lact.getInt("Lactation");
+
+		RequestSpecification request = RestAssured.given();
+		JSONObject requestParams = new JSONObject();
+		requestParams.put("MilkingDate", "2020-01-08");
+
+
+		JSONArray arrayElementOneArray = new JSONArray();
+		JSONObject arrayElementOneArrayElementOne = new JSONObject();
+		arrayElementOneArrayElementOne.put("session", "morning");
+		arrayElementOneArrayElementOne.put("cattleId", cattleId );
+		arrayElementOneArrayElementOne.put("yield",500);
+		arrayElementOneArray.put(arrayElementOneArrayElementOne);
+		requestParams.put("CattleYieldInSession", arrayElementOneArray);
+
+
+		Response response = request.body(requestParams.toString())
+				.header("Content-Type", "application/json")
+				.header("Authorization","Bearer " + usertoken)
+				.post(abstractname);
+
+		//Print response
+		response.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals(200, response.getStatusCode());
+
+		String jsonString = response.asString();
+		String message = JsonPath.from(jsonString).get("message");
+		Assert.assertEquals("Milking data added successfully.", message);
+		
+		
+		ViewCattleMilking details = new ViewCattleMilking();
+		String milkingDetails = details.viewCattleMilkingDetails(usertoken,lactation,cattleId);
+		
+		System.out.println(milkingDetails);
+		
+		JSONObject milkingResponse = new JSONObject(milkingDetails);
+		JSONObject milkingData = milkingResponse.getJSONObject("cattleMilkingData");
+		JSONArray milking = milkingData.getJSONArray("milking");
+		JSONObject sessionDetails = milking.getJSONObject(0);
+		Assert.assertEquals( "morning", sessionDetails.get("session"));
+		Assert.assertEquals( 500, sessionDetails.getInt("yield"));
+		Assert.assertEquals(sessionDetails.getString("date").contains("2020-07-09"),true);
+		
+	} 
+}

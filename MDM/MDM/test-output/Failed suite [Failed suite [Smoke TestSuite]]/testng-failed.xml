@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Failed suite [Failed suite [Smoke TestSuite]]]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Smoke Testcases(failed)(failed)(failed)">
+    <groups>
+      <run>
+        <include name="Smoke"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="com.nitara.MasterData.GetCattleTypeMaster">
+        <methods>
+          <include name="getUserAuthenticationToken"/>
+          <include name="GetCattleTypeMasterInEnglish"/>
+        </methods>
+      </class> <!-- com.nitara.MasterData.GetCattleTypeMaster -->
+      <class name="com.nitara.MasterData.GetCattleAgeTypeMasterData">
+        <methods>
+          <include name="getUserAuthenticationToken"/>
+          <include name="GetCattleAgeTypeMasterDataInEnglish"/>
+        </methods>
+      </class> <!-- com.nitara.MasterData.GetCattleAgeTypeMasterData -->
+    </classes>
+  </test> <!-- Smoke Testcases(failed)(failed)(failed) -->
+</suite> <!-- Failed suite [Failed suite [Failed suite [Smoke TestSuite]]] -->

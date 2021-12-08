@@ -1,0 +1,315 @@
+package com.nitara.BCSManagement;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import com.nitara.CattleDetails.ViewCattleProfile;
+import com.nitara.CattleRegistration.RegisterBullCattle;
+import com.nitara.base.GenericBase;
+import com.nitara.utilities.ExcelUtils;
+import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+
+public class BCS extends GenericBase{
+
+	/*@Test(groups= {"Smoke"})
+	public void addBcsDetails() throws IOException {
+
+		String abstractname = prop.getProperty("AddBcs");
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String filepath = prop.getProperty("CattleOtherActivities");
+
+		RequestSpecification request = RestAssured.given();
+
+		//Read from excel to JSONObject
+		ExcelUtils data = new ExcelUtils();
+		JSONObject requestParams= data.readCase("AddBcs","AddBcs",filepath);
+		
+		Response response = request.body(requestParams.toString())
+				.header("Content-Type", "application/json")
+				.header("Authorization","Bearer " + token)
+				.post(abstractname);
+		
+		System.out.println(requestParams);
+
+		//Print response
+		response.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals(response.getStatusCode(),200);
+
+		//Validate success message
+		String jsonString = response.asString();
+		String  message = JsonPath.from(jsonString).get("message");
+		Assert.assertEquals( message,"BCS Data added successfully.");
+
+		
+		//Assert the added changes
+		ViewCattleProfile cattleprofile = new ViewCattleProfile();
+		String viewDetails = cattleprofile.viewCattleProfile(requestParams.getString("CattleId"),token);
+
+		JSONObject cattleDetails = new JSONObject(viewDetails);
+		JSONObject cattleMilkingData = cattleDetails.getJSONObject("cattleProfileData");
+
+		Assert.assertEquals((cattleMilkingData.getInt("currentBcs")),requestParams.getInt("BcsScore"));
+		String date = requestParams.getString("DateOfBcs");
+		Assert.assertEquals(cattleMilkingData.getString("currentBcsRecordedDate").contains(date), true);
+
+		System.out.println("Bcs data added.");
+
+	}*/
+	
+	
+	public void AddBcsDetailsWithin15days() throws Exception {
+
+		String abstractname = prop.getProperty("AddBcs");
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String filepath = prop.getProperty("CattleOtherActivities");
+
+		RequestSpecification request = RestAssured.given();
+		
+		RegisterBullCattle bull = new RegisterBullCattle();
+		bull.registerBullCattle(token);
+
+		//Read from excel to JSONObject
+		ExcelUtils data = new ExcelUtils();
+		JSONObject requestParams= data.readCase("AddBcs","AddBcsDetailsWithin15days",filepath);
+
+		Response response = request.body(requestParams.toString())
+				.header("Content-Type", "application/json")
+				.header("Authorization","Bearer " + token)
+				.post(abstractname);
+		
+		System.out.println(requestParams);
+
+		//Print response
+		response.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals(response.getStatusCode(),400);
+
+		//Validate success message
+		String jsonString = response.asString();
+		String  message = JsonPath.from(jsonString).get("message");
+		Assert.assertEquals( message,"BCS data cannot be entered within 15 days of previous BCS data entry.");
+
+	
+	}
+	
+	@Test(groups= {"Regression"})
+	public void AddBcsForFutureDate() throws IOException {
+
+		String abstractname = prop.getProperty("AddBcs");
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String filepath = prop.getProperty("CattleOtherActivities");
+
+		RequestSpecification request = RestAssured.given();
+
+		//Read from excel to JSONObject
+		ExcelUtils data = new ExcelUtils();
+		JSONObject requestParams= data.readCase("AddBcs","AddBcsForFutureDate",filepath);
+		
+		Response response = request.body(requestParams.toString())
+				.header("Content-Type", "application/json")
+				.header("Authorization","Bearer " + token)
+				.post(abstractname);
+
+
+		System.out.println(requestParams);
+		
+	
+
+		//Print response
+		response.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals(response.getStatusCode(),400);
+
+		//Validate success message
+		String jsonString = response.asString();
+
+		JSONObject res = new JSONObject(jsonString);
+		
+		JSONObject error = res.getJSONObject("errors");
+		
+		Assert.assertEquals(error.length(),1);
+		
+		JSONArray bcs = error.getJSONArray("DateOfBcs");
+		Assert.assertEquals(bcs.getString(0), "12/10/2023 must not be greater than today");
+
+	
+	}
+	
+	@Test(groups= {"Regression"})
+	public void EmptyFields() throws IOException {
+
+		String abstractname = prop.getProperty("AddBcs");
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String filepath = prop.getProperty("CattleOtherActivities");
+
+		RequestSpecification request = RestAssured.given();
+
+		//Read from excel to JSONObject
+		ExcelUtils data = new ExcelUtils();
+		JSONObject requestParams= data.readCase("AddBcs","EmptyFields",filepath);
+		
+		Response response = request.body(requestParams.toString())
+				.header("Content-Type", "application/json")
+				.header("Authorization","Bearer " + token)
+				.post(abstractname);
+
+		System.out.println(requestParams);		
+	
+
+		//Print response
+		response.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals(response.getStatusCode(),400);
+
+		//Validate success message
+		String jsonString = response.asString();
+
+		JSONObject res = new JSONObject(jsonString);
+		
+		JSONObject error = res.getJSONObject("errors");
+		
+		Assert.assertEquals(error.length(),2);
+		
+		JSONArray bcs = error.getJSONArray("BcsScore");
+		Assert.assertEquals(bcs.getString(0),"The field BcsScore must be between 1 and 5.");
+		
+		JSONArray CattleId = error.getJSONArray("CattleId");
+		Assert.assertEquals(CattleId.getString(0), "The CattleId field is required.");
+
+	
+	}
+	
+	@Test(groups= {"Regression"})
+	public void BcsLessthan1() throws IOException {
+
+		String abstractname = prop.getProperty("AddBcs");
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String filepath = prop.getProperty("CattleOtherActivities");
+
+		RequestSpecification request = RestAssured.given();
+
+		//Read from excel to JSONObject
+		ExcelUtils data = new ExcelUtils();
+		JSONObject requestParams= data.readCase("AddBcs","BcsLessthan1",filepath);
+		
+		Response response = request.body(requestParams.toString())
+				.header("Content-Type", "application/json")
+				.header("Authorization","Bearer " + token)
+				.post(abstractname);
+
+		System.out.println(requestParams);		
+	
+
+		//Print response
+		response.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals(response.getStatusCode(),400);
+
+		//Validate success message
+		String jsonString = response.asString();
+
+		JSONObject res = new JSONObject(jsonString);
+		
+		JSONObject error = res.getJSONObject("errors");
+		
+		Assert.assertEquals(error.length(),1);
+		
+		JSONArray bcs = error.getJSONArray("BcsScore");
+		Assert.assertEquals(bcs.getString(0),"The field BcsScore must be between 1 and 5.");
+		
+		
+	
+	}
+	
+	@Test(groups= {"Regression"})
+	public void BcsGreaterthan5() throws IOException {
+
+		String abstractname = prop.getProperty("AddBcs");
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String filepath = prop.getProperty("CattleOtherActivities");
+
+		RequestSpecification request = RestAssured.given();
+
+		//Read from excel to JSONObject
+		ExcelUtils data = new ExcelUtils();
+		JSONObject requestParams= data.readCase("AddBcs","BcsGreaterthan5",filepath);
+		
+		Response response = request.body(requestParams.toString())
+				.header("Content-Type", "application/json")
+				.header("Authorization","Bearer " + token)
+				.post(abstractname);
+
+		System.out.println(requestParams);		
+	
+
+		//Print response
+		response.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals(response.getStatusCode(),400);
+
+		//Validate success message
+		String jsonString = response.asString();
+
+		JSONObject res = new JSONObject(jsonString);
+		
+		JSONObject error = res.getJSONObject("errors");
+		
+		Assert.assertEquals(error.length(),1);
+		
+		JSONArray bcs = error.getJSONArray("BcsScore");
+		Assert.assertEquals(bcs.getString(0),"The field BcsScore must be between 1 and 5.");
+		
+	
+	}
+	//@Test(groups= {"Regression"})
+	public void Backdatedentry() throws IOException {
+
+		String abstractname = prop.getProperty("AddBcs");
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String filepath = prop.getProperty("CattleOtherActivities");
+
+		RequestSpecification request = RestAssured.given();
+
+		//Read from excel to JSONObject
+		ExcelUtils data = new ExcelUtils();
+		JSONObject requestParams= data.readCase("AddBcs","Backdatedentry",filepath);
+		
+		Response response = request.body(requestParams.toString())
+				.header("Content-Type", "application/json")
+				.header("Authorization","Bearer " + token)
+				.post(abstractname);
+
+		System.out.println(requestParams);		
+	
+
+		//Print response
+		response.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals(response.getStatusCode(),400);
+
+		
+		//Validate message
+		String jsonString = response.asString();
+		String  message = JsonPath.from(jsonString).get("message");
+		Assert.assertEquals( message,"Cannot add a BCS entry on a date before previously added BCS entry. Please delete previous BCS entry and then add new BCS data..");
+
+		
+	
+	}
+	
+}

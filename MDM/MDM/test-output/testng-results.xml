@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="5" passed="5" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2021-08-09T12:02:15 IST" name="Default suite" finished-at="2021-08-09T12:02:21 IST" duration-ms="6513">
+    <groups>
+      <group name="Regression">
+        <method signature="AddTreatment.addMedicineswithoutDosage()[pri:0, instance:com.nitara.Treatment.AddTreatment@5562c41e]" name="addMedicineswithoutDosage" class="com.nitara.Treatment.AddTreatment"/>
+        <method signature="AddTreatment.addTreatment()[pri:0, instance:com.nitara.Treatment.AddTreatment@5562c41e]" name="addTreatment" class="com.nitara.Treatment.AddTreatment"/>
+        <method signature="AddTreatment.addTreatmentFutureDate()[pri:0, instance:com.nitara.Treatment.AddTreatment@5562c41e]" name="addTreatmentFutureDate" class="com.nitara.Treatment.AddTreatment"/>
+        <method signature="AddTreatment.addTreatmentMandatoryField()[pri:0, instance:com.nitara.Treatment.AddTreatment@5562c41e]" name="addTreatmentMandatoryField" class="com.nitara.Treatment.AddTreatment"/>
+        <method signature="AddTreatment.followUpAfterRequired()[pri:0, instance:com.nitara.Treatment.AddTreatment@5562c41e]" name="followUpAfterRequired" class="com.nitara.Treatment.AddTreatment"/>
+      </group> <!-- Regression -->
+      <group name="Smoke">
+        <method signature="AddTreatment.addTreatment()[pri:0, instance:com.nitara.Treatment.AddTreatment@5562c41e]" name="addTreatment" class="com.nitara.Treatment.AddTreatment"/>
+      </group> <!-- Smoke -->
+    </groups>
+    <test started-at="2021-08-09T12:02:15 IST" name="Default test" finished-at="2021-08-09T12:02:21 IST" duration-ms="6513">
+      <class name="com.nitara.Treatment.AddTreatment">
+        <test-method is-config="true" signature="getUserAuthenticationToken()[pri:0, instance:com.nitara.Treatment.AddTreatment@5562c41e]" started-at="2021-08-09T12:02:15 IST" name="getUserAuthenticationToken" finished-at="2021-08-09T12:02:16 IST" duration-ms="1178" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getUserAuthenticationToken -->
+        <test-method signature="addMedicineswithoutDosage()[pri:0, instance:com.nitara.Treatment.AddTreatment@5562c41e]" started-at="2021-08-09T12:02:16 IST" name="addMedicineswithoutDosage" finished-at="2021-08-09T12:02:17 IST" duration-ms="793" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addMedicineswithoutDosage -->
+        <test-method is-config="true" signature="getUserAuthenticationToken()[pri:0, instance:com.nitara.Treatment.AddTreatment@5562c41e]" started-at="2021-08-09T12:02:17 IST" name="getUserAuthenticationToken" finished-at="2021-08-09T12:02:17 IST" duration-ms="324" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getUserAuthenticationToken -->
+        <test-method signature="addTreatment()[pri:0, instance:com.nitara.Treatment.AddTreatment@5562c41e]" started-at="2021-08-09T12:02:17 IST" name="addTreatment" finished-at="2021-08-09T12:02:18 IST" duration-ms="825" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addTreatment -->
+        <test-method is-config="true" signature="getUserAuthenticationToken()[pri:0, instance:com.nitara.Treatment.AddTreatment@5562c41e]" started-at="2021-08-09T12:02:18 IST" name="getUserAuthenticationToken" finished-at="2021-08-09T12:02:18 IST" duration-ms="410" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getUserAuthenticationToken -->
+        <test-method signature="addTreatmentFutureDate()[pri:0, instance:com.nitara.Treatment.AddTreatment@5562c41e]" started-at="2021-08-09T12:02:18 IST" name="addTreatmentFutureDate" finished-at="2021-08-09T12:02:19 IST" duration-ms="799" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addTreatmentFutureDate -->
+        <test-method is-config="true" signature="getUserAuthenticationToken()[pri:0, instance:com.nitara.Treatment.AddTreatment@5562c41e]" started-at="2021-08-09T12:02:19 IST" name="getUserAuthenticationToken" finished-at="2021-08-09T12:02:20 IST" duration-ms="429" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getUserAuthenticationToken -->
+        <test-method signature="addTreatmentMandatoryField()[pri:0, instance:com.nitara.Treatment.AddTreatment@5562c41e]" started-at="2021-08-09T12:02:20 IST" name="addTreatmentMandatoryField" finished-at="2021-08-09T12:02:20 IST" duration-ms="393" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addTreatmentMandatoryField -->
+        <test-method is-config="true" signature="getUserAuthenticationToken()[pri:0, instance:com.nitara.Treatment.AddTreatment@5562c41e]" started-at="2021-08-09T12:02:20 IST" name="getUserAuthenticationToken" finished-at="2021-08-09T12:02:20 IST" duration-ms="316" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getUserAuthenticationToken -->
+        <test-method signature="followUpAfterRequired()[pri:0, instance:com.nitara.Treatment.AddTreatment@5562c41e]" started-at="2021-08-09T12:02:20 IST" name="followUpAfterRequired" finished-at="2021-08-09T12:02:21 IST" duration-ms="1013" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- followUpAfterRequired -->
+      </class> <!-- com.nitara.Treatment.AddTreatment -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

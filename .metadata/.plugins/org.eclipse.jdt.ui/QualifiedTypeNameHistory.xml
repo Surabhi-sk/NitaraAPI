@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="com.nitara.CattleRegistration.GetCattleId"/>
+    <fullyQualifiedTypeName name="java.util.Calendar"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="org.apache.poi.ss.util.CellUtil"/>
+    <fullyQualifiedTypeName name="com.nitara.utilities.Helper"/>
+    <fullyQualifiedTypeName name="com.nitara.CattleRegistration.RegisterBullCattle"/>
+    <fullyQualifiedTypeName name="org.testng.annotations.Test"/>
+    <fullyQualifiedTypeName name="com.nitara.FarmManagement.ViewFarmCattleList"/>
+    <fullyQualifiedTypeName name="com.nitara.base.GenericBase"/>
+    <fullyQualifiedTypeName name="com.nitara.WeightManagement.AddWeightDirect"/>
+    <fullyQualifiedTypeName name="com.nitara.Treatment.ViewTreatmentData"/>
+    <fullyQualifiedTypeName name="com.nitara.HeatManagement.AddHeat"/>
+    <fullyQualifiedTypeName name="com.nitara.Treatment.AddTreatment"/>
+</qualifiedTypeNameHistroy>

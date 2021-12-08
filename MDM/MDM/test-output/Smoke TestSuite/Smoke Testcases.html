@@ -1,0 +1,1741 @@
+<html>
+<head>
+<title>TestNG:  Smoke Testcases</title>
+<link href="../testng.css" rel="stylesheet" type="text/css" />
+<link href="../my-testng.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+.log { display: none;} 
+.stack-trace { display: none;} 
+</style>
+<script type="text/javascript">
+<!--
+function flip(e) {
+  current = e.style.display;
+  if (current == 'block') {
+    e.style.display = 'none';
+    return 0;
+  }
+  else {
+    e.style.display = 'block';
+    return 1;
+  }
+}
+
+function toggleBox(szDivId, elem, msg1, msg2)
+{
+  var res = -1;  if (document.getElementById) {
+    res = flip(document.getElementById(szDivId));
+  }
+  else if (document.all) {
+    // this is the way old msie versions work
+    res = flip(document.all[szDivId]);
+  }
+  if(elem) {
+    if(res == 0) elem.innerHTML = msg1; else elem.innerHTML = msg2;
+  }
+
+}
+
+function toggleAllBoxes() {
+  if (document.getElementsByTagName) {
+    d = document.getElementsByTagName('div');
+    for (i = 0; i < d.length; i++) {
+      if (d[i].className == 'log') {
+        flip(d[i]);
+      }
+    }
+  }
+}
+
+// -->
+</script>
+
+</head>
+<body>
+<h2 align='center'>Smoke Testcases</h2><table border='1' align="center">
+<tr>
+<td>Tests passed/Failed/Skipped:</td><td>137/3/6</td>
+</tr><tr>
+<td>Started on:</td><td>Mon Aug 09 11:59:19 IST 2021</td>
+</tr>
+<tr><td>Total time:</td><td>134 seconds (134943 ms)</td>
+</tr><tr>
+<td>Included groups:</td><td>Smoke </td>
+</tr><tr>
+<td>Excluded groups:</td><td></td>
+</tr>
+</table><p/>
+<small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED CONFIGURATIONS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='com.nitara.UserPreferenceManagement.SetUserServicesPreferences.getUserAuthenticationToken()'><b>getUserAuthenticationToken</b><br>Test class: com.nitara.UserPreferenceManagement.SetUserServicesPreferences</td>
+<td><div><pre>io.restassured.path.json.exception.JsonPathException: Failed to parse the JSON document
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:930)
+	at io.restassured.path.json.JsonPath$4.doParseWith(JsonPath.java:895)
+	at io.restassured.path.json.JsonPath$JsonParser.parseWith(JsonPath.java:975)
+	at io.restassured.path.json.JsonPath.get(JsonPath.java:201)
+	at com.nitara.base.GenericBase.getUserAuthenticationToken(GenericBase.java:84)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: groovy.json.JsonException: Lexing failed on line: 1, column: 1, while reading &apos;D&apos;, no possible valid JSON value or punctuation could be recognized.
+	at groovy.json.JsonLexer.nextToken(JsonLexer.java:83)
+	at groovy.json.JsonLexer$nextToken.call(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parse(ConfigurableJsonSlurper.groovy:97)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper$parse.callCurrent(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parseText(ConfigurableJsonSlurper.groovy:83)
+	at io.restassured.path.json.JsonPath$4$1.method(JsonPath.java:893)
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:928)
+	... 35 more
+... Removed 30 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace118887511", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace118887511'><pre>io.restassured.path.json.exception.JsonPathException: Failed to parse the JSON document
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:930)
+	at io.restassured.path.json.JsonPath$4.doParseWith(JsonPath.java:895)
+	at io.restassured.path.json.JsonPath$JsonParser.parseWith(JsonPath.java:975)
+	at io.restassured.path.json.JsonPath.get(JsonPath.java:201)
+	at com.nitara.base.GenericBase.getUserAuthenticationToken(GenericBase.java:84)
+	at jdk.internal.reflect.GeneratedMethodAccessor130.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+	at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:62)
+	at org.testng.internal.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:385)
+	at org.testng.internal.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:321)
+	at org.testng.internal.TestInvoker.runConfigMethods(TestInvoker.java:700)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:527)
+	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:794)
+	at org.testng.TestRunner.run(TestRunner.java:596)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+	at org.testng.TestNG.runSuites(TestNG.java:1063)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: groovy.json.JsonException: Lexing failed on line: 1, column: 1, while reading &apos;D&apos;, no possible valid JSON value or punctuation could be recognized.
+	at groovy.json.JsonLexer.nextToken(JsonLexer.java:83)
+	at groovy.json.JsonLexer$nextToken.call(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parse(ConfigurableJsonSlurper.groovy:97)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper$parse.callCurrent(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parseText(ConfigurableJsonSlurper.groovy:83)
+	at io.restassured.path.json.JsonPath$4$1.method(JsonPath.java:893)
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:928)
+	... 35 more
+</pre></div></td>
+<td>0</td>
+<td>com.nitara.UserPreferenceManagement.SetUserServicesPreferences@f99f5e0</td></tr>
+<tr>
+<td title='com.nitara.UserPreferenceManagement.GetUserInsurancePreferences.getUserAuthenticationToken()'><b>getUserAuthenticationToken</b><br>Test class: com.nitara.UserPreferenceManagement.GetUserInsurancePreferences</td>
+<td><div><pre>io.restassured.path.json.exception.JsonPathException: Failed to parse the JSON document
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:930)
+	at io.restassured.path.json.JsonPath$4.doParseWith(JsonPath.java:895)
+	at io.restassured.path.json.JsonPath$JsonParser.parseWith(JsonPath.java:975)
+	at io.restassured.path.json.JsonPath.get(JsonPath.java:201)
+	at com.nitara.base.GenericBase.getUserAuthenticationToken(GenericBase.java:84)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: groovy.json.JsonException: Lexing failed on line: 1, column: 1, while reading &apos;D&apos;, no possible valid JSON value or punctuation could be recognized.
+	at groovy.json.JsonLexer.nextToken(JsonLexer.java:83)
+	at groovy.json.JsonLexer$nextToken.call(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parse(ConfigurableJsonSlurper.groovy:97)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper$parse.callCurrent(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parseText(ConfigurableJsonSlurper.groovy:83)
+	at io.restassured.path.json.JsonPath$4$1.method(JsonPath.java:893)
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:928)
+	... 35 more
+... Removed 30 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace2035401634", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace2035401634'><pre>io.restassured.path.json.exception.JsonPathException: Failed to parse the JSON document
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:930)
+	at io.restassured.path.json.JsonPath$4.doParseWith(JsonPath.java:895)
+	at io.restassured.path.json.JsonPath$JsonParser.parseWith(JsonPath.java:975)
+	at io.restassured.path.json.JsonPath.get(JsonPath.java:201)
+	at com.nitara.base.GenericBase.getUserAuthenticationToken(GenericBase.java:84)
+	at jdk.internal.reflect.GeneratedMethodAccessor130.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+	at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:62)
+	at org.testng.internal.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:385)
+	at org.testng.internal.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:321)
+	at org.testng.internal.TestInvoker.runConfigMethods(TestInvoker.java:700)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:527)
+	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:794)
+	at org.testng.TestRunner.run(TestRunner.java:596)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+	at org.testng.TestNG.runSuites(TestNG.java:1063)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: groovy.json.JsonException: Lexing failed on line: 1, column: 1, while reading &apos;D&apos;, no possible valid JSON value or punctuation could be recognized.
+	at groovy.json.JsonLexer.nextToken(JsonLexer.java:83)
+	at groovy.json.JsonLexer$nextToken.call(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parse(ConfigurableJsonSlurper.groovy:97)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper$parse.callCurrent(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parseText(ConfigurableJsonSlurper.groovy:83)
+	at io.restassured.path.json.JsonPath$4$1.method(JsonPath.java:893)
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:928)
+	... 35 more
+</pre></div></td>
+<td>0</td>
+<td>com.nitara.UserPreferenceManagement.GetUserInsurancePreferences@1a72a540</td></tr>
+<tr>
+<td title='com.nitara.MasterData.GetUnitMasterData.getUserAuthenticationToken()'><b>getUserAuthenticationToken</b><br>Test class: com.nitara.MasterData.GetUnitMasterData</td>
+<td><div><pre>io.restassured.path.json.exception.JsonPathException: Failed to parse the JSON document
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:930)
+	at io.restassured.path.json.JsonPath$4.doParseWith(JsonPath.java:895)
+	at io.restassured.path.json.JsonPath$JsonParser.parseWith(JsonPath.java:975)
+	at io.restassured.path.json.JsonPath.get(JsonPath.java:201)
+	at com.nitara.base.GenericBase.getUserAuthenticationToken(GenericBase.java:84)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: groovy.json.JsonException: Lexing failed on line: 1, column: 1, while reading &apos;D&apos;, no possible valid JSON value or punctuation could be recognized.
+	at groovy.json.JsonLexer.nextToken(JsonLexer.java:83)
+	at groovy.json.JsonLexer$nextToken.call(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parse(ConfigurableJsonSlurper.groovy:97)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper$parse.callCurrent(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parseText(ConfigurableJsonSlurper.groovy:83)
+	at io.restassured.path.json.JsonPath$4$1.method(JsonPath.java:893)
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:928)
+	... 36 more
+... Removed 31 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1246023616", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1246023616'><pre>io.restassured.path.json.exception.JsonPathException: Failed to parse the JSON document
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:930)
+	at io.restassured.path.json.JsonPath$4.doParseWith(JsonPath.java:895)
+	at io.restassured.path.json.JsonPath$JsonParser.parseWith(JsonPath.java:975)
+	at io.restassured.path.json.JsonPath.get(JsonPath.java:201)
+	at com.nitara.base.GenericBase.getUserAuthenticationToken(GenericBase.java:84)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+	at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:62)
+	at org.testng.internal.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:385)
+	at org.testng.internal.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:321)
+	at org.testng.internal.TestInvoker.runConfigMethods(TestInvoker.java:700)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:527)
+	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:794)
+	at org.testng.TestRunner.run(TestRunner.java:596)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+	at org.testng.TestNG.runSuites(TestNG.java:1063)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: groovy.json.JsonException: Lexing failed on line: 1, column: 1, while reading &apos;D&apos;, no possible valid JSON value or punctuation could be recognized.
+	at groovy.json.JsonLexer.nextToken(JsonLexer.java:83)
+	at groovy.json.JsonLexer$nextToken.call(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parse(ConfigurableJsonSlurper.groovy:97)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper$parse.callCurrent(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parseText(ConfigurableJsonSlurper.groovy:83)
+	at io.restassured.path.json.JsonPath$4$1.method(JsonPath.java:893)
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:928)
+	... 36 more
+</pre></div></td>
+<td>0</td>
+<td>com.nitara.MasterData.GetUnitMasterData@67b9b51a</td></tr>
+<tr>
+<td title='com.nitara.UserPreferenceManagement.SetUserMilkingPreferences.getUserAuthenticationToken()'><b>getUserAuthenticationToken</b><br>Test class: com.nitara.UserPreferenceManagement.SetUserMilkingPreferences</td>
+<td><div><pre>io.restassured.path.json.exception.JsonPathException: Failed to parse the JSON document
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:930)
+	at io.restassured.path.json.JsonPath$4.doParseWith(JsonPath.java:895)
+	at io.restassured.path.json.JsonPath$JsonParser.parseWith(JsonPath.java:975)
+	at io.restassured.path.json.JsonPath.get(JsonPath.java:201)
+	at com.nitara.base.GenericBase.getUserAuthenticationToken(GenericBase.java:84)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: groovy.json.JsonException: Lexing failed on line: 1, column: 1, while reading &apos;D&apos;, no possible valid JSON value or punctuation could be recognized.
+	at groovy.json.JsonLexer.nextToken(JsonLexer.java:83)
+	at groovy.json.JsonLexer$nextToken.call(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parse(ConfigurableJsonSlurper.groovy:97)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper$parse.callCurrent(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parseText(ConfigurableJsonSlurper.groovy:83)
+	at io.restassured.path.json.JsonPath$4$1.method(JsonPath.java:893)
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:928)
+	... 35 more
+... Removed 30 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace28318221", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace28318221'><pre>io.restassured.path.json.exception.JsonPathException: Failed to parse the JSON document
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:930)
+	at io.restassured.path.json.JsonPath$4.doParseWith(JsonPath.java:895)
+	at io.restassured.path.json.JsonPath$JsonParser.parseWith(JsonPath.java:975)
+	at io.restassured.path.json.JsonPath.get(JsonPath.java:201)
+	at com.nitara.base.GenericBase.getUserAuthenticationToken(GenericBase.java:84)
+	at jdk.internal.reflect.GeneratedMethodAccessor130.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+	at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:62)
+	at org.testng.internal.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:385)
+	at org.testng.internal.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:321)
+	at org.testng.internal.TestInvoker.runConfigMethods(TestInvoker.java:700)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:527)
+	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:794)
+	at org.testng.TestRunner.run(TestRunner.java:596)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+	at org.testng.TestNG.runSuites(TestNG.java:1063)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: groovy.json.JsonException: Lexing failed on line: 1, column: 1, while reading &apos;D&apos;, no possible valid JSON value or punctuation could be recognized.
+	at groovy.json.JsonLexer.nextToken(JsonLexer.java:83)
+	at groovy.json.JsonLexer$nextToken.call(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parse(ConfigurableJsonSlurper.groovy:97)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper$parse.callCurrent(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parseText(ConfigurableJsonSlurper.groovy:83)
+	at io.restassured.path.json.JsonPath$4$1.method(JsonPath.java:893)
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:928)
+	... 35 more
+</pre></div></td>
+<td>0</td>
+<td>com.nitara.UserPreferenceManagement.SetUserMilkingPreferences@2812b107</td></tr>
+<tr>
+<td title='com.nitara.AccountManagement.GetActivityHistory.getUserAuthenticationToken()'><b>getUserAuthenticationToken</b><br>Test class: com.nitara.AccountManagement.GetActivityHistory</td>
+<td><div><pre>io.restassured.path.json.exception.JsonPathException: Failed to parse the JSON document
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:930)
+	at io.restassured.path.json.JsonPath$4.doParseWith(JsonPath.java:895)
+	at io.restassured.path.json.JsonPath$JsonParser.parseWith(JsonPath.java:975)
+	at io.restassured.path.json.JsonPath.get(JsonPath.java:201)
+	at com.nitara.base.GenericBase.getUserAuthenticationToken(GenericBase.java:84)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: groovy.json.JsonException: Lexing failed on line: 1, column: 1, while reading &apos;D&apos;, no possible valid JSON value or punctuation could be recognized.
+	at groovy.json.JsonLexer.nextToken(JsonLexer.java:83)
+	at groovy.json.JsonLexer$nextToken.call(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parse(ConfigurableJsonSlurper.groovy:97)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper$parse.callCurrent(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parseText(ConfigurableJsonSlurper.groovy:83)
+	at io.restassured.path.json.JsonPath$4$1.method(JsonPath.java:893)
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:928)
+	... 35 more
+... Removed 30 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1163157114", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1163157114'><pre>io.restassured.path.json.exception.JsonPathException: Failed to parse the JSON document
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:930)
+	at io.restassured.path.json.JsonPath$4.doParseWith(JsonPath.java:895)
+	at io.restassured.path.json.JsonPath$JsonParser.parseWith(JsonPath.java:975)
+	at io.restassured.path.json.JsonPath.get(JsonPath.java:201)
+	at com.nitara.base.GenericBase.getUserAuthenticationToken(GenericBase.java:84)
+	at jdk.internal.reflect.GeneratedMethodAccessor130.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+	at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:62)
+	at org.testng.internal.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:385)
+	at org.testng.internal.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:321)
+	at org.testng.internal.TestInvoker.runConfigMethods(TestInvoker.java:700)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:527)
+	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:794)
+	at org.testng.TestRunner.run(TestRunner.java:596)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+	at org.testng.TestNG.runSuites(TestNG.java:1063)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: groovy.json.JsonException: Lexing failed on line: 1, column: 1, while reading &apos;D&apos;, no possible valid JSON value or punctuation could be recognized.
+	at groovy.json.JsonLexer.nextToken(JsonLexer.java:83)
+	at groovy.json.JsonLexer$nextToken.call(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parse(ConfigurableJsonSlurper.groovy:97)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper$parse.callCurrent(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parseText(ConfigurableJsonSlurper.groovy:83)
+	at io.restassured.path.json.JsonPath$4$1.method(JsonPath.java:893)
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:928)
+	... 35 more
+</pre></div></td>
+<td>0</td>
+<td>com.nitara.AccountManagement.GetActivityHistory@563e4951</td></tr>
+<tr>
+<td title='com.nitara.UserPreferenceManagement.GetUserHealthPreferences.getUserAuthenticationToken()'><b>getUserAuthenticationToken</b><br>Test class: com.nitara.UserPreferenceManagement.GetUserHealthPreferences</td>
+<td><div><pre>io.restassured.path.json.exception.JsonPathException: Failed to parse the JSON document
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:930)
+	at io.restassured.path.json.JsonPath$4.doParseWith(JsonPath.java:895)
+	at io.restassured.path.json.JsonPath$JsonParser.parseWith(JsonPath.java:975)
+	at io.restassured.path.json.JsonPath.get(JsonPath.java:201)
+	at com.nitara.base.GenericBase.getUserAuthenticationToken(GenericBase.java:84)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: groovy.json.JsonException: Lexing failed on line: 1, column: 1, while reading &apos;D&apos;, no possible valid JSON value or punctuation could be recognized.
+	at groovy.json.JsonLexer.nextToken(JsonLexer.java:83)
+	at groovy.json.JsonLexer$nextToken.call(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parse(ConfigurableJsonSlurper.groovy:97)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper$parse.callCurrent(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parseText(ConfigurableJsonSlurper.groovy:83)
+	at io.restassured.path.json.JsonPath$4$1.method(JsonPath.java:893)
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:928)
+	... 35 more
+... Removed 30 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1291832417", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1291832417'><pre>io.restassured.path.json.exception.JsonPathException: Failed to parse the JSON document
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:930)
+	at io.restassured.path.json.JsonPath$4.doParseWith(JsonPath.java:895)
+	at io.restassured.path.json.JsonPath$JsonParser.parseWith(JsonPath.java:975)
+	at io.restassured.path.json.JsonPath.get(JsonPath.java:201)
+	at com.nitara.base.GenericBase.getUserAuthenticationToken(GenericBase.java:84)
+	at jdk.internal.reflect.GeneratedMethodAccessor130.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+	at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:62)
+	at org.testng.internal.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:385)
+	at org.testng.internal.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:321)
+	at org.testng.internal.TestInvoker.runConfigMethods(TestInvoker.java:700)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:527)
+	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:794)
+	at org.testng.TestRunner.run(TestRunner.java:596)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+	at org.testng.TestNG.runSuites(TestNG.java:1063)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: groovy.json.JsonException: Lexing failed on line: 1, column: 1, while reading &apos;D&apos;, no possible valid JSON value or punctuation could be recognized.
+	at groovy.json.JsonLexer.nextToken(JsonLexer.java:83)
+	at groovy.json.JsonLexer$nextToken.call(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parse(ConfigurableJsonSlurper.groovy:97)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper$parse.callCurrent(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parseText(ConfigurableJsonSlurper.groovy:83)
+	at io.restassured.path.json.JsonPath$4$1.method(JsonPath.java:893)
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:928)
+	... 35 more
+</pre></div></td>
+<td>0</td>
+<td>com.nitara.UserPreferenceManagement.GetUserHealthPreferences@2931522b</td></tr>
+</table><p>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='com.nitara.FollowUp.UpdateFollowUp.UpdateFollowUpDetails()'><b>UpdateFollowUpDetails</b><br>Test class: com.nitara.FollowUp.UpdateFollowUp</td>
+<td><div><pre>java.lang.AssertionError: expected [400] but found [200]
+	at com.nitara.FollowUp.UpdateFollowUp.UpdateFollowUpDetails(UpdateFollowUp.java:53)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 33 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace502805865", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace502805865'><pre>java.lang.AssertionError: expected [400] but found [200]
+	at org.testng.Assert.fail(Assert.java:99)
+	at org.testng.Assert.failNotEquals(Assert.java:1037)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:140)
+	at org.testng.Assert.assertEquals(Assert.java:122)
+	at org.testng.Assert.assertEquals(Assert.java:907)
+	at org.testng.Assert.assertEquals(Assert.java:917)
+	at com.nitara.FollowUp.UpdateFollowUp.UpdateFollowUpDetails(UpdateFollowUp.java:53)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
+	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:794)
+	at org.testng.TestRunner.run(TestRunner.java:596)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+	at org.testng.TestNG.runSuites(TestNG.java:1063)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+</pre></div></td>
+<td>0</td>
+<td>com.nitara.FollowUp.UpdateFollowUp@2e48362c</td></tr>
+<tr>
+<td title='com.nitara.FollowUp.AddFollowUp.AddFollowUpDetails()'><b>AddFollowUpDetails</b><br>Test class: com.nitara.FollowUp.AddFollowUp</td>
+<td><div><pre>java.lang.AssertionError: expected [400] but found [200]
+	at com.nitara.FollowUp.AddFollowUp.AddFollowUpDetails(AddFollowUp.java:66)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 33 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace964385581", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace964385581'><pre>java.lang.AssertionError: expected [400] but found [200]
+	at org.testng.Assert.fail(Assert.java:99)
+	at org.testng.Assert.failNotEquals(Assert.java:1037)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:140)
+	at org.testng.Assert.assertEquals(Assert.java:122)
+	at org.testng.Assert.assertEquals(Assert.java:907)
+	at org.testng.Assert.assertEquals(Assert.java:917)
+	at com.nitara.FollowUp.AddFollowUp.AddFollowUpDetails(AddFollowUp.java:66)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
+	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:794)
+	at org.testng.TestRunner.run(TestRunner.java:596)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+	at org.testng.TestNG.runSuites(TestNG.java:1063)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+</pre></div></td>
+<td>0</td>
+<td>com.nitara.FollowUp.AddFollowUp@36060e</td></tr>
+<tr>
+<td title='com.nitara.FollowUp.DeleteFollowUp.deleteFollowUp()'><b>deleteFollowUp</b><br>Test class: com.nitara.FollowUp.DeleteFollowUp</td>
+<td><div><pre>java.lang.AssertionError: expected [400] but found [200]
+	at com.nitara.FollowUp.DeleteFollowUp.deleteFollowUp(DeleteFollowUp.java:38)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 33 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace244926383", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace244926383'><pre>java.lang.AssertionError: expected [400] but found [200]
+	at org.testng.Assert.fail(Assert.java:99)
+	at org.testng.Assert.failNotEquals(Assert.java:1037)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:140)
+	at org.testng.Assert.assertEquals(Assert.java:122)
+	at org.testng.Assert.assertEquals(Assert.java:907)
+	at org.testng.Assert.assertEquals(Assert.java:917)
+	at com.nitara.FollowUp.DeleteFollowUp.deleteFollowUp(DeleteFollowUp.java:38)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
+	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:794)
+	at org.testng.TestRunner.run(TestRunner.java:596)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+	at org.testng.TestNG.runSuites(TestNG.java:1063)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+</pre></div></td>
+<td>0</td>
+<td>com.nitara.FollowUp.DeleteFollowUp@7d446ed1</td></tr>
+</table><p>
+<table width='100%' border='1' class='invocation-passed'>
+<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='com.nitara.PDManagement.UpdatePD.updatePD()'><b>updatePD</b><br>Test class: com.nitara.PDManagement.UpdatePD</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.PDManagement.UpdatePD@7d9e8ef7</td></tr>
+<tr>
+<td title='com.nitara.CattleManagement.AddNewCattleProfilePics.addNewCattleProfilePics()'><b>addNewCattleProfilePics</b><br>Test class: com.nitara.CattleManagement.AddNewCattleProfilePics</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.CattleManagement.AddNewCattleProfilePics@3d9c13b5</td></tr>
+<tr>
+<td title='com.nitara.KYCManagement.SubmitKYCDetails.submitKYCDetails()'><b>submitKYCDetails</b><br>Test class: com.nitara.KYCManagement.SubmitKYCDetails</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.KYCManagement.SubmitKYCDetails@1fb19a0</td></tr>
+<tr>
+<td title='com.nitara.CattleDetails.ViewCattleAnalysis.viewCattleAnalysis()'><b>viewCattleAnalysis</b><br>Test class: com.nitara.CattleDetails.ViewCattleAnalysis</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.CattleDetails.ViewCattleAnalysis@7c8c9a05</td></tr>
+<tr>
+<td title='com.nitara.VaccinationManagement.DeleteVaccination.deleteVaccination()'><b>deleteVaccination</b><br>Test class: com.nitara.VaccinationManagement.DeleteVaccination</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.VaccinationManagement.DeleteVaccination@54504ecd</td></tr>
+<tr>
+<td title='com.nitara.HeatManagement.UpdateHeat.updateHeat()'><b>updateHeat</b><br>Test class: com.nitara.HeatManagement.UpdateHeat</td>
+<td></td>
+<td>1</td>
+<td>com.nitara.HeatManagement.UpdateHeat@1ab06251</td></tr>
+<tr>
+<td title='com.nitara.UserPreferenceManagement.GetUserBreedingPreferences.getUserBreedingPreferences()'><b>getUserBreedingPreferences</b><br>Test class: com.nitara.UserPreferenceManagement.GetUserBreedingPreferences</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.UserPreferenceManagement.GetUserBreedingPreferences@3e6f3f28</td></tr>
+<tr>
+<td title='com.nitara.PDManagement.DeletePD.deletePD()'><b>deletePD</b><br>Test class: com.nitara.PDManagement.DeletePD</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.PDManagement.DeletePD@50de186c</td></tr>
+<tr>
+<td title='com.nitara.CattleManagement.SearchMilkingCattle.SearchMilkingCattleDetails()'><b>SearchMilkingCattleDetails</b><br>Test class: com.nitara.CattleManagement.SearchMilkingCattle</td>
+<td></td>
+<td>1</td>
+<td>com.nitara.CattleManagement.SearchMilkingCattle@146dfe6</td></tr>
+<tr>
+<td title='com.nitara.MasterData.GetAllMasterData.getAllMasterData()'><b>getAllMasterData</b><br>Test class: com.nitara.MasterData.GetAllMasterData</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.MasterData.GetAllMasterData@b7c4869</td></tr>
+<tr>
+<td title='com.nitara.CattleDetails.ViewAllCattlePhotos.viewAllCattlePhotos()'><b>viewAllCattlePhotos</b><br>Test class: com.nitara.CattleDetails.ViewAllCattlePhotos</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.CattleDetails.ViewAllCattlePhotos@60129b9a</td></tr>
+<tr>
+<td title='com.nitara.DiseasePredictor.GetAllDiseases.GetAllDiseases()'><b>GetAllDiseases</b><br>Test class: com.nitara.DiseasePredictor.GetAllDiseases</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.DiseasePredictor.GetAllDiseases@72437d8d</td></tr>
+<tr>
+<td title='com.nitara.KYCManagement.ApproveKYCDetails.approveKYCDetails()'><b>approveKYCDetails</b><br>Test class: com.nitara.KYCManagement.ApproveKYCDetails</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.KYCManagement.ApproveKYCDetails@13d4992d</td></tr>
+<tr>
+<td title='com.nitara.FarmManagement.DeleteRevenue.deleteRevenue()'><b>deleteRevenue</b><br>Test class: com.nitara.FarmManagement.DeleteRevenue</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.FarmManagement.DeleteRevenue@10a9d961</td></tr>
+<tr>
+<td title='com.nitara.WeightManagement.DeleteWeight.deleteWeight()'><b>deleteWeight</b><br>Test class: com.nitara.WeightManagement.DeleteWeight</td>
+<td></td>
+<td>1</td>
+<td>com.nitara.WeightManagement.DeleteWeight@5be46f9d</td></tr>
+<tr>
+<td title='com.nitara.FarmManagement.AddExpense.addExpense()'><b>addExpense</b><br>Test class: com.nitara.FarmManagement.AddExpense</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.FarmManagement.AddExpense@71e693fa</td></tr>
+<tr>
+<td title='com.nitara.FarmManagement.AddRevenueCatergories.addRevenueCatergories()'><b>addRevenueCatergories</b><br>Test class: com.nitara.FarmManagement.AddRevenueCatergories</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.FarmManagement.AddRevenueCatergories@7fcf2fc1</td></tr>
+<tr>
+<td title='com.nitara.MasterData.GetSemenBrandMasterData.GetSemenBrandMasterDataInEnglish()'><b>GetSemenBrandMasterDataInEnglish</b><br>Test class: com.nitara.MasterData.GetSemenBrandMasterData</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.MasterData.GetSemenBrandMasterData@6fa34d52</td></tr>
+<tr>
+<td title='com.nitara.PermissionManagement.UpdateUserDetails.updateUserDetails()'><b>updateUserDetails</b><br>Test class: com.nitara.PermissionManagement.UpdateUserDetails</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.PermissionManagement.UpdateUserDetails@1bae316d</td></tr>
+<tr>
+<td title='com.nitara.DiseasePredictor.GetDiseases.GetDiseases()'><b>GetDiseases</b><br>Test class: com.nitara.DiseasePredictor.GetDiseases</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.DiseasePredictor.GetDiseases@3c9c0d96</td></tr>
+<tr>
+<td title='com.nitara.AccountManagement.GetAllLoggedInDevices.getAllLoggedInDevices()'><b>getAllLoggedInDevices</b><br>Test class: com.nitara.AccountManagement.GetAllLoggedInDevices</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.AccountManagement.GetAllLoggedInDevices@7d3d101b</td></tr>
+<tr>
+<td title='com.nitara.HousingManagement.AddCattlesToGroup.addCattlesToGroup()'><b>addCattlesToGroup</b><br>Test class: com.nitara.HousingManagement.AddCattlesToGroup</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.HousingManagement.AddCattlesToGroup@67545b57</td></tr>
+<tr>
+<td title='com.nitara.UserPreferenceManagement.SetUserHealthPreferences.SetHealthPreferences()'><b>SetHealthPreferences</b><br>Test class: com.nitara.UserPreferenceManagement.SetUserHealthPreferences</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.UserPreferenceManagement.SetUserHealthPreferences@662706a7</td></tr>
+<tr>
+<td title='com.nitara.FarmManagement.ViewExpense.viewExpense()'><b>viewExpense</b><br>Test class: com.nitara.FarmManagement.ViewExpense</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.FarmManagement.ViewExpense@1c93f6e1</td></tr>
+<tr>
+<td title='com.nitara.VaccinationManagement.ViewVaccinationData.viewVaccinationData()'><b>viewVaccinationData</b><br>Test class: com.nitara.VaccinationManagement.ViewVaccinationData</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.VaccinationManagement.ViewVaccinationData@327bcebd</td></tr>
+<tr>
+<td title='com.nitara.MasterData.GetCattleTypeMaster.GetCattleTypeMasterInEnglish()'><b>GetCattleTypeMasterInEnglish</b><br>Test class: com.nitara.MasterData.GetCattleTypeMaster</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.MasterData.GetCattleTypeMaster@127a7a2e</td></tr>
+<tr>
+<td title='com.nitara.FarmManagement.GetFarmMetadata.getFarmMetadata()'><b>getFarmMetadata</b><br>Test class: com.nitara.FarmManagement.GetFarmMetadata</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.FarmManagement.GetFarmMetadata@2fd953a6</td></tr>
+<tr>
+<td title='com.nitara.AccountManagement.RemoveProfilePic.removeProfilePic()'><b>removeProfilePic</b><br>Test class: com.nitara.AccountManagement.RemoveProfilePic</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.AccountManagement.RemoveProfilePic@41294f8</td></tr>
+<tr>
+<td title='com.nitara.PermissionManagement.RemoveUser.removeUser()'><b>removeUser</b><br>Test class: com.nitara.PermissionManagement.RemoveUser</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.PermissionManagement.RemoveUser@6d025197</td></tr>
+<tr>
+<td title='com.nitara.MasterData.GetGenderTypeMasterData.GetGenderTypeMasterDataInEnglish()'><b>GetGenderTypeMasterDataInEnglish</b><br>Test class: com.nitara.MasterData.GetGenderTypeMasterData</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.MasterData.GetGenderTypeMasterData@7cb502c</td></tr>
+<tr>
+<td title='com.nitara.MasterData.GetCattleAgeTypeMasterData.GetCattleAgeTypeMasterDataInEnglish()'><b>GetCattleAgeTypeMasterDataInEnglish</b><br>Test class: com.nitara.MasterData.GetCattleAgeTypeMasterData</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.MasterData.GetCattleAgeTypeMasterData@a37aefe</td></tr>
+<tr>
+<td title='com.nitara.UserLogin.ChangePassword.changePassword()'><b>changePassword</b><br>Test class: com.nitara.UserLogin.ChangePassword</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.UserLogin.ChangePassword@38ba6ce3</td></tr>
+<tr>
+<td title='com.nitara.CattleManagement.ViewInsuranceData.viewInsuranceData()'><b>viewInsuranceData</b><br>Test class: com.nitara.CattleManagement.ViewInsuranceData</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.CattleManagement.ViewInsuranceData@c7ba306</td></tr>
+<tr>
+<td title='com.nitara.Treatment.ViewTreatmentData.viewTreatmentData()'><b>viewTreatmentData</b><br>Test class: com.nitara.Treatment.ViewTreatmentData</td>
+<td></td>
+<td>3</td>
+<td>com.nitara.Treatment.ViewTreatmentData@3697186</td></tr>
+<tr>
+<td title='com.nitara.HousingManagement.ViewHousingSuggestions.viewHousingSuggestions()'><b>viewHousingSuggestions</b><br>Test class: com.nitara.HousingManagement.ViewHousingSuggestions</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.HousingManagement.ViewHousingSuggestions@63f259c3</td></tr>
+<tr>
+<td title='com.nitara.CattleManagement.UpdateBcs.updateBcs()'><b>updateBcs</b><br>Test class: com.nitara.CattleManagement.UpdateBcs</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.CattleManagement.UpdateBcs@42530531</td></tr>
+<tr>
+<td title='com.nitara.MasterData.GetPdProcessMasterData.GetPdProcessMasterDataInEnglish()'><b>GetPdProcessMasterDataInEnglish</b><br>Test class: com.nitara.MasterData.GetPdProcessMasterData</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.MasterData.GetPdProcessMasterData@57c03d88</td></tr>
+<tr>
+<td title='com.nitara.CattleManagement.SearchCattle.searchCattle()'><b>searchCattle</b><br>Test class: com.nitara.CattleManagement.SearchCattle</td>
+<td></td>
+<td>18</td>
+<td>com.nitara.CattleManagement.SearchCattle@3daf7722</td></tr>
+<tr>
+<td title='com.nitara.InseminationManagement.AddInsemination.AddInseminationData()'><b>AddInseminationData</b><br>Test class: com.nitara.InseminationManagement.AddInsemination</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.InseminationManagement.AddInsemination@3af0a9da</td></tr>
+<tr>
+<td title='com.nitara.CattleManagement.AddBcs.addBcsDetails()'><b>addBcsDetails</b><br>Test class: com.nitara.CattleManagement.AddBcs</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.CattleManagement.AddBcs@36a5cabc</td></tr>
+<tr>
+<td title='com.nitara.AccountManagement.GetAllActiveDevices.getAllActiveDevices()'><b>getAllActiveDevices</b><br>Test class: com.nitara.AccountManagement.GetAllActiveDevices</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.AccountManagement.GetAllActiveDevices@3eb81efb</td></tr>
+<tr>
+<td title='com.nitara.UserLogin.UserLoginNew.userLoginwithValidData()'><b>userLoginwithValidData</b><br>Test class: com.nitara.UserLogin.UserLoginNew</td>
+<td></td>
+<td>0</td>
+<td>{}</td></tr>
+<tr>
+<td title='com.nitara.FarmManagement.ViewFarmCattleList.viewFarmCattleList()'><b>viewFarmCattleList</b><br>Test class: com.nitara.FarmManagement.ViewFarmCattleList</td>
+<td></td>
+<td>2</td>
+<td>com.nitara.FarmManagement.ViewFarmCattleList@5c44c582</td></tr>
+<tr>
+<td title='com.nitara.FarmManagement.DeleteExpense.deleteExpense()'><b>deleteExpense</b><br>Test class: com.nitara.FarmManagement.DeleteExpense</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.FarmManagement.DeleteExpense@5ddf0d24</td></tr>
+<tr>
+<td title='com.nitara.DryPeriodManagement.DeleteDryPeriod.deleteDryPeriod()'><b>deleteDryPeriod</b><br>Test class: com.nitara.DryPeriodManagement.DeleteDryPeriod</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.DryPeriodManagement.DeleteDryPeriod@7922d892</td></tr>
+<tr>
+<td title='com.nitara.PermissionManagement.AddNewUser.addNewUserDetails()'><b>addNewUserDetails</b><br>Test class: com.nitara.PermissionManagement.AddNewUser</td>
+<td></td>
+<td>1</td>
+<td>com.nitara.PermissionManagement.AddNewUser@727eb8cb</td></tr>
+<tr>
+<td title='com.nitara.MasterData.GetIDProofMasterData.GetIDProofMasterDataInEnglish()'><b>GetIDProofMasterDataInEnglish</b><br>Test class: com.nitara.MasterData.GetIDProofMasterData</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.MasterData.GetIDProofMasterData@11bb571c</td></tr>
+<tr>
+<td title='com.nitara.CattleRegistration.RegisterMilkingOrDryCattle.registerMilkingOrDryCattle()'><b>registerMilkingOrDryCattle</b><br>Test class: com.nitara.CattleRegistration.RegisterMilkingOrDryCattle</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.CattleRegistration.RegisterMilkingOrDryCattle@4397ad89</td></tr>
+<tr>
+<td title='com.nitara.UserLogin.ForgotPassword.forgotPassword()'><b>forgotPassword</b><br>Test class: com.nitara.UserLogin.ForgotPassword</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.UserLogin.ForgotPassword@25f4878b</td></tr>
+<tr>
+<td title='com.nitara.FarmManagement.UpdateRevenue.updateRevenue()'><b>updateRevenue</b><br>Test class: com.nitara.FarmManagement.UpdateRevenue</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.FarmManagement.UpdateRevenue@60df60da</td></tr>
+<tr>
+<td title='com.nitara.MasterData.GetA1A2TypeMasterData.GetAllA1A2TypeMasterDataInEnglish()'><b>GetAllA1A2TypeMasterDataInEnglish</b><br>Test class: com.nitara.MasterData.GetA1A2TypeMasterData</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.MasterData.GetA1A2TypeMasterData@45ac5f9b</td></tr>
+<tr>
+<td title='com.nitara.Treatment.UpdateTreatment.updateTreatment()'><b>updateTreatment</b><br>Test class: com.nitara.Treatment.UpdateTreatment</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.Treatment.UpdateTreatment@36b4091c</td></tr>
+<tr>
+<td title='com.nitara.UserLogin.GenerateOtpForLogin.generateOtpForLogin()'><b>generateOtpForLogin</b><br>Test class: com.nitara.UserLogin.GenerateOtpForLogin</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.UserLogin.GenerateOtpForLogin@6bf08014</td></tr>
+<tr>
+<td title='com.nitara.MasterData.GetRevenueMasterData.GetRevenueMasterDataInEnglish()'><b>GetRevenueMasterDataInEnglish</b><br>Test class: com.nitara.MasterData.GetRevenueMasterData</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.MasterData.GetRevenueMasterData@55cf0d14</td></tr>
+<tr>
+<td title='com.nitara.UserPreferenceManagement.SetUserInsurancePreferences.setInsurancePreference()'><b>setInsurancePreference</b><br>Test class: com.nitara.UserPreferenceManagement.SetUserInsurancePreferences</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.UserPreferenceManagement.SetUserInsurancePreferences@5e403b4a</td></tr>
+<tr>
+<td title='com.nitara.VaccinationManagement.AddVaccination.addVaccination()'><b>addVaccination</b><br>Test class: com.nitara.VaccinationManagement.AddVaccination</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.VaccinationManagement.AddVaccination@3403e2ac</td></tr>
+<tr>
+<td title='com.nitara.MilkingManagement.AddCattleMilking.addCattleMilking()'><b>addCattleMilking</b><br>Test class: com.nitara.MilkingManagement.AddCattleMilking</td>
+<td></td>
+<td>1</td>
+<td>com.nitara.MilkingManagement.AddCattleMilking@2f67b837</td></tr>
+<tr>
+<td title='com.nitara.FarmManagement.AddRevenue.addRevenue()'><b>addRevenue</b><br>Test class: com.nitara.FarmManagement.AddRevenue</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.FarmManagement.AddRevenue@3eb77ea8</td></tr>
+<tr>
+<td title='com.nitara.HeatManagement.AddHeat.AddHeat_Data()'><b>AddHeat_Data</b><br>Test class: com.nitara.HeatManagement.AddHeat</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.HeatManagement.AddHeat@455b6df1</td></tr>
+<tr>
+<td title='com.nitara.KYCManagement.GetAllPendingKYCDetails.getAllPendingKYCDetails()'><b>getAllPendingKYCDetails</b><br>Test class: com.nitara.KYCManagement.GetAllPendingKYCDetails</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.KYCManagement.GetAllPendingKYCDetails@53251a66</td></tr>
+<tr>
+<td title='com.nitara.CattleRegistration.RegisterBullCattle.registerBullCattle()'><b>registerBullCattle</b><br>Test class: com.nitara.CattleRegistration.RegisterBullCattle</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.CattleRegistration.RegisterBullCattle@51549490</td></tr>
+<tr>
+<td title='com.nitara.InseminationManagement.UpdateInsemination.updateInsemination()'><b>updateInsemination</b><br>Test class: com.nitara.InseminationManagement.UpdateInsemination</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.InseminationManagement.UpdateInsemination@8e50104</td></tr>
+<tr>
+<td title='com.nitara.HousingManagement.GetFarmHousing.getFarmHousing()'><b>getFarmHousing</b><br>Test class: com.nitara.HousingManagement.GetFarmHousing</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.HousingManagement.GetFarmHousing@416c58f5</td></tr>
+<tr>
+<td title='com.nitara.PermissionManagement.GetAllUsersAndRoles.getAllUsersAndRoles()'><b>getAllUsersAndRoles</b><br>Test class: com.nitara.PermissionManagement.GetAllUsersAndRoles</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.PermissionManagement.GetAllUsersAndRoles@b83a9be</td></tr>
+<tr>
+<td title='com.nitara.DewormingManagement.AddDeworming.addDeworming()'><b>addDeworming</b><br>Test class: com.nitara.DewormingManagement.AddDeworming</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.DewormingManagement.AddDeworming@59a008ba</td></tr>
+<tr>
+<td title='com.nitara.HeatManagement.DeleteHeat.deleteHeat()'><b>deleteHeat</b><br>Test class: com.nitara.HeatManagement.DeleteHeat</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.HeatManagement.DeleteHeat@1115ec15</td></tr>
+<tr>
+<td title='com.nitara.MasterData.GetBreedMasterData.GetBreedMasterDataInEnglish()'><b>GetBreedMasterDataInEnglish</b><br>Test class: com.nitara.MasterData.GetBreedMasterData</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.MasterData.GetBreedMasterData@68034211</td></tr>
+<tr>
+<td title='com.nitara.MasterData.GetCountryCodeMasterData.GetVaccinationTypeMasterDataInEnglish()'><b>GetVaccinationTypeMasterDataInEnglish</b><br>Test class: com.nitara.MasterData.GetCountryCodeMasterData</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.MasterData.GetCountryCodeMasterData@58594a11</td></tr>
+<tr>
+<td title='com.nitara.HousingManagement.AddSmartShed.addSmartShed()'><b>addSmartShed</b><br>Test class: com.nitara.HousingManagement.AddSmartShed</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.HousingManagement.AddSmartShed@21129f1f</td></tr>
+<tr>
+<td title='com.nitara.PermissionManagement.GetUserDetails.getUserDetails()'><b>getUserDetails</b><br>Test class: com.nitara.PermissionManagement.GetUserDetails</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.PermissionManagement.GetUserDetails@5b7a8434</td></tr>
+<tr>
+<td title='com.nitara.CalvingManagement.AddCalving.AddCalvingData()'><b>AddCalvingData</b><br>Test class: com.nitara.CalvingManagement.AddCalving</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.CalvingManagement.AddCalving@38604b81</td></tr>
+<tr>
+<td title='com.nitara.Treatment.DeleteTreatment.deleteTreatment()'><b>deleteTreatment</b><br>Test class: com.nitara.Treatment.DeleteTreatment</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.Treatment.DeleteTreatment@413f69cc</td></tr>
+<tr>
+<td title='com.nitara.HousingManagement.AddUserDefinedGroup.addUserDefinedGroup()'><b>addUserDefinedGroup</b><br>Test class: com.nitara.HousingManagement.AddUserDefinedGroup</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.HousingManagement.AddUserDefinedGroup@176b75f7</td></tr>
+<tr>
+<td title='com.nitara.CattleManagement.DeleteBcs.deleteBcs()'><b>deleteBcs</b><br>Test class: com.nitara.CattleManagement.DeleteBcs</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.CattleManagement.DeleteBcs@291f18</td></tr>
+<tr>
+<td title='com.nitara.MilkingManagement.AddFarmMilking.addUserFarmMilking()'><b>addUserFarmMilking</b><br>Test class: com.nitara.MilkingManagement.AddFarmMilking</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.MilkingManagement.AddFarmMilking@6cce16f4</td></tr>
+<tr>
+<td title='com.nitara.DiseasePredictor.GetTreatments.GetTreatments()'><b>GetTreatments</b><br>Test class: com.nitara.DiseasePredictor.GetTreatments</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.DiseasePredictor.GetTreatments@10cf09e8</td></tr>
+<tr>
+<td title='com.nitara.AccountManagement.GetUserRoles.getUserRoles()'><b>getUserRoles</b><br>Test class: com.nitara.AccountManagement.GetUserRoles</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.AccountManagement.GetUserRoles@6d026701</td></tr>
+<tr>
+<td title='com.nitara.UserLogin.ResendOTP.resendOTP()'><b>resendOTP</b><br>Test class: com.nitara.UserLogin.ResendOTP</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.UserLogin.ResendOTP@3081f72c</td></tr>
+<tr>
+<td title='com.nitara.UserLogin.ResendVoiceOTP.resendVoiceOTP()'><b>resendVoiceOTP</b><br>Test class: com.nitara.UserLogin.ResendVoiceOTP</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.UserLogin.ResendVoiceOTP@7ceb3185</td></tr>
+<tr>
+<td title='com.nitara.HousingManagement.AddUserDefinedShed.addUserDefinedShed()'><b>addUserDefinedShed</b><br>Test class: com.nitara.HousingManagement.AddUserDefinedShed</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.HousingManagement.AddUserDefinedShed@258d79be</td></tr>
+<tr>
+<td title='com.nitara.DewormingManagement.UpdateDeworming.updateDeworming()'><b>updateDeworming</b><br>Test class: com.nitara.DewormingManagement.UpdateDeworming</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.DewormingManagement.UpdateDeworming@58ce9668</td></tr>
+<tr>
+<td title='com.nitara.MasterData.GetGroupMasterData.GetGroupTypeMasterDataInEnglish()'><b>GetGroupTypeMasterDataInEnglish</b><br>Test class: com.nitara.MasterData.GetGroupMasterData</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.MasterData.GetGroupMasterData@4fbe37eb</td></tr>
+<tr>
+<td title='com.nitara.CattleManagement.AddInsurance.addInsurance()'><b>addInsurance</b><br>Test class: com.nitara.CattleManagement.AddInsurance</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.CattleManagement.AddInsurance@1984b1f</td></tr>
+<tr>
+<td title='com.nitara.DewormingManagement.DeleteDeworming.deleteDeworming()'><b>deleteDeworming</b><br>Test class: com.nitara.DewormingManagement.DeleteDeworming</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.DewormingManagement.DeleteDeworming@70f02c32</td></tr>
+<tr>
+<td title='com.nitara.UserRegistration.RegisterUser.registerUser()'><b>registerUser</b><br>Test class: com.nitara.UserRegistration.RegisterUser</td>
+<td></td>
+<td>1</td>
+<td>com.nitara.UserRegistration.RegisterUser@68f4865</td></tr>
+<tr>
+<td title='com.nitara.MasterData.GetUserRolesMasterData.GetUserRolesMasterDataInEnglish()'><b>GetUserRolesMasterDataInEnglish</b><br>Test class: com.nitara.MasterData.GetUserRolesMasterData</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.MasterData.GetUserRolesMasterData@5c669da8</td></tr>
+<tr>
+<td title='com.nitara.DewormingManagement.ViewDewormingData.viewDewormingData()'><b>viewDewormingData</b><br>Test class: com.nitara.DewormingManagement.ViewDewormingData</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.DewormingManagement.ViewDewormingData@2796aeae</td></tr>
+<tr>
+<td title='com.nitara.FarmManagement.ViewRevenue.viewRevenue()'><b>viewRevenue</b><br>Test class: com.nitara.FarmManagement.ViewRevenue</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.FarmManagement.ViewRevenue@4ae9cfc1</td></tr>
+<tr>
+<td title='com.nitara.UserPreferenceManagement.GetUserMilkingPreferences.getMilkingPreferences()'><b>getMilkingPreferences</b><br>Test class: com.nitara.UserPreferenceManagement.GetUserMilkingPreferences</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.UserPreferenceManagement.GetUserMilkingPreferences@4b7dc788</td></tr>
+<tr>
+<td title='com.nitara.CattleManagement.RemoveCattle.RemoveCattleDetails()'><b>RemoveCattleDetails</b><br>Test class: com.nitara.CattleManagement.RemoveCattle</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.CattleManagement.RemoveCattle@2631f68c</td></tr>
+<tr>
+<td title='com.nitara.MasterData.GetExpenseMasterData.GetExpenseMasterDataInEnglish()'><b>GetExpenseMasterDataInEnglish</b><br>Test class: com.nitara.MasterData.GetExpenseMasterData</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.MasterData.GetExpenseMasterData@5b3f61ff</td></tr>
+<tr>
+<td title='com.nitara.HousingManagement.DeleteGroup.deleteGroup()'><b>deleteGroup</b><br>Test class: com.nitara.HousingManagement.DeleteGroup</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.HousingManagement.DeleteGroup@3e74829</td></tr>
+<tr>
+<td title='com.nitara.WeightManagement.AddWeightDirect.addWeightDirect()'><b>addWeightDirect</b><br>Test class: com.nitara.WeightManagement.AddWeightDirect</td>
+<td></td>
+<td>1</td>
+<td>com.nitara.WeightManagement.AddWeightDirect@7a220c9a</td></tr>
+<tr>
+<td title='com.nitara.CattleDetails.ViewCattleBreedingActivity.viewCattleBreedingActivity()'><b>viewCattleBreedingActivity</b><br>Test class: com.nitara.CattleDetails.ViewCattleBreedingActivity</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.CattleDetails.ViewCattleBreedingActivity@6f19ac19</td></tr>
+<tr>
+<td title='com.nitara.AccountManagement.ViewProfilePic.viewProfilePic()'><b>viewProfilePic</b><br>Test class: com.nitara.AccountManagement.ViewProfilePic</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.AccountManagement.ViewProfilePic@571c5681</td></tr>
+<tr>
+<td title='com.nitara.FarmManagement.SearchFarm.searchFarm()'><b>searchFarm</b><br>Test class: com.nitara.FarmManagement.SearchFarm</td>
+<td></td>
+<td>1</td>
+<td>com.nitara.FarmManagement.SearchFarm@5f9be66c</td></tr>
+<tr>
+<td title='com.nitara.CattleManagement.UpdateCattleProfile.updateCattleProfile()'><b>updateCattleProfile</b><br>Test class: com.nitara.CattleManagement.UpdateCattleProfile</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.CattleManagement.UpdateCattleProfile@401f7633</td></tr>
+<tr>
+<td title='com.nitara.CattleRegistration.RegisterCalfCattle.registerCalf()'><b>registerCalf</b><br>Test class: com.nitara.CattleRegistration.RegisterCalfCattle</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.CattleRegistration.RegisterCalfCattle@301eda63</td></tr>
+<tr>
+<td title='com.nitara.DiseasePredictor.GetCategories.getCategories()'><b>getCategories</b><br>Test class: com.nitara.DiseasePredictor.GetCategories</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.DiseasePredictor.GetCategories@32a68f4f</td></tr>
+<tr>
+<td title='com.nitara.AccountManagement.UpdateProfilePic.updateProfilePic()'><b>updateProfilePic</b><br>Test class: com.nitara.AccountManagement.UpdateProfilePic</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.AccountManagement.UpdateProfilePic@573906eb</td></tr>
+<tr>
+<td title='com.nitara.CattleManagement.ViewBcsData.viewBcsData()'><b>viewBcsData</b><br>Test class: com.nitara.CattleManagement.ViewBcsData</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.CattleManagement.ViewBcsData@35645047</td></tr>
+<tr>
+<td title='com.nitara.DiseasePredictor.GetPreventions.GetTreatments()'><b>GetTreatments</b><br>Test class: com.nitara.DiseasePredictor.GetPreventions</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.DiseasePredictor.GetPreventions@4ed5eb72</td></tr>
+<tr>
+<td title='com.nitara.HousingManagement.AddSmartGroup.addSmartGroup()'><b>addSmartGroup</b><br>Test class: com.nitara.HousingManagement.AddSmartGroup</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.HousingManagement.AddSmartGroup@7d898981</td></tr>
+<tr>
+<td title='com.nitara.UserLogin.Logout.logout()'><b>logout</b><br>Test class: com.nitara.UserLogin.Logout</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.UserLogin.Logout@59e32960</td></tr>
+<tr>
+<td title='com.nitara.PDManagement.AddPD.addPD()'><b>addPD</b><br>Test class: com.nitara.PDManagement.AddPD</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.PDManagement.AddPD@73302995</td></tr>
+<tr>
+<td title='com.nitara.DiseasePredictor.GetAllSymptoms.GetAllSymptoms()'><b>GetAllSymptoms</b><br>Test class: com.nitara.DiseasePredictor.GetAllSymptoms</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.DiseasePredictor.GetAllSymptoms@5a1de7fb</td></tr>
+<tr>
+<td title='com.nitara.CattleManagement.DeleteCattleProfilePic.deleteCattleProfilePic()'><b>deleteCattleProfilePic</b><br>Test class: com.nitara.CattleManagement.DeleteCattleProfilePic</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.CattleManagement.DeleteCattleProfilePic@558bdf1f</td></tr>
+<tr>
+<td title='com.nitara.AccountManagement.UpdateUserProfile.updateUserProfile()'><b>updateUserProfile</b><br>Test class: com.nitara.AccountManagement.UpdateUserProfile</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.AccountManagement.UpdateUserProfile@1b45c0e</td></tr>
+<tr>
+<td title='com.nitara.MasterData.GetDewormerMasterData.GetDewormerMasterDataInEnglish()'><b>GetDewormerMasterDataInEnglish</b><br>Test class: com.nitara.MasterData.GetDewormerMasterData</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.MasterData.GetDewormerMasterData@14fa86ae</td></tr>
+<tr>
+<td title='com.nitara.PermissionManagement.VerifyUserExists.verifyUserExists()'><b>verifyUserExists</b><br>Test class: com.nitara.PermissionManagement.VerifyUserExists</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.PermissionManagement.VerifyUserExists@7cbd9d24</td></tr>
+<tr>
+<td title='com.nitara.DryPeriodManagement.AddDryPeriod.addDryPeriod()'><b>addDryPeriod</b><br>Test class: com.nitara.DryPeriodManagement.AddDryPeriod</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.DryPeriodManagement.AddDryPeriod@4b213651</td></tr>
+<tr>
+<td title='com.nitara.CalvingManagement.DeleteCalving.deleteCalving()'><b>deleteCalving</b><br>Test class: com.nitara.CalvingManagement.DeleteCalving</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.CalvingManagement.DeleteCalving@600b9d27</td></tr>
+<tr>
+<td title='com.nitara.MasterData.GetVaccinationTypeMasterData.GetVaccinationTypeMasterDataInEnglish()'><b>GetVaccinationTypeMasterDataInEnglish</b><br>Test class: com.nitara.MasterData.GetVaccinationTypeMasterData</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.MasterData.GetVaccinationTypeMasterData@4032d386</td></tr>
+<tr>
+<td title='com.nitara.DiseasePredictor.ReportDisease.ReportDisease()'><b>ReportDisease</b><br>Test class: com.nitara.DiseasePredictor.ReportDisease</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.DiseasePredictor.ReportDisease@177bea38</td></tr>
+<tr>
+<td title='com.nitara.CattleRegistration.RegisterHeiferCattle.registerHeiferCattle()'><b>registerHeiferCattle</b><br>Test class: com.nitara.CattleRegistration.RegisterHeiferCattle</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.CattleRegistration.RegisterHeiferCattle@609db546</td></tr>
+<tr>
+<td title='com.nitara.FarmManagement.ViewFarmAnalysis.viewFarmAnalysis()'><b>viewFarmAnalysis</b><br>Test class: com.nitara.FarmManagement.ViewFarmAnalysis</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.FarmManagement.ViewFarmAnalysis@132e0cc</td></tr>
+<tr>
+<td title='com.nitara.CalvingManagement.UpdateCalving.updateCalving()'><b>updateCalving</b><br>Test class: com.nitara.CalvingManagement.UpdateCalving</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.CalvingManagement.UpdateCalving@babafc2</td></tr>
+<tr>
+<td title='com.nitara.MasterData.GetGroupTypeMasterData.GetGroupTypeMasterDataInEnglish()'><b>GetGroupTypeMasterDataInEnglish</b><br>Test class: com.nitara.MasterData.GetGroupTypeMasterData</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.MasterData.GetGroupTypeMasterData@2049a9c1</td></tr>
+<tr>
+<td title='com.nitara.CattleDetails.ViewCattleProfile.viewCattleProfile()'><b>viewCattleProfile</b><br>Test class: com.nitara.CattleDetails.ViewCattleProfile</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.CattleDetails.ViewCattleProfile@7a67e3c6</td></tr>
+<tr>
+<td title='com.nitara.FarmManagement.UpdateExpenses.updateExpense()'><b>updateExpense</b><br>Test class: com.nitara.FarmManagement.UpdateExpenses</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.FarmManagement.UpdateExpenses@21337f7b</td></tr>
+<tr>
+<td title='com.nitara.AccountManagement.RegisterFarm.RegisterNewFarmSP()'><b>RegisterNewFarmSP</b><br>Test class: com.nitara.AccountManagement.RegisterFarm</td>
+<td></td>
+<td>1</td>
+<td>com.nitara.AccountManagement.RegisterFarm@40317ba2</td></tr>
+<tr>
+<td title='com.nitara.WeightManagement.ViewWeightData.viewWeightData()'><b>viewWeightData</b><br>Test class: com.nitara.WeightManagement.ViewWeightData</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.WeightManagement.ViewWeightData@479460a6</td></tr>
+<tr>
+<td title='com.nitara.DiseasePredictor.GetSymptoms.GetSymptoms()'><b>GetSymptoms</b><br>Test class: com.nitara.DiseasePredictor.GetSymptoms</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.DiseasePredictor.GetSymptoms@7e6ef134</td></tr>
+<tr>
+<td title='com.nitara.KYCManagement.RejectKYCDetails.rejectKYCDetails()'><b>rejectKYCDetails</b><br>Test class: com.nitara.KYCManagement.RejectKYCDetails</td>
+<td></td>
+<td>1</td>
+<td>com.nitara.KYCManagement.RejectKYCDetails@418c5a9c</td></tr>
+<tr>
+<td title='com.nitara.InseminationManagement.DeleteInsemination.deleteInsemination()'><b>deleteInsemination</b><br>Test class: com.nitara.InseminationManagement.DeleteInsemination</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.InseminationManagement.DeleteInsemination@74a6f9c1</td></tr>
+<tr>
+<td title='com.nitara.WeightManagement.AddWeightByGirth.AddWeight_ByGirth()'><b>AddWeight_ByGirth</b><br>Test class: com.nitara.WeightManagement.AddWeightByGirth</td>
+<td></td>
+<td>1</td>
+<td>com.nitara.WeightManagement.AddWeightByGirth@1fb669c3</td></tr>
+<tr>
+<td title='com.nitara.MasterData.GetMilkingSessionMasterData.GetMilkingSessionMasterDataInEnglish()'><b>GetMilkingSessionMasterDataInEnglish</b><br>Test class: com.nitara.MasterData.GetMilkingSessionMasterData</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.MasterData.GetMilkingSessionMasterData@2a225dd7</td></tr>
+<tr>
+<td title='com.nitara.InseminationManagement.AddInseminationByServiceProvider.addInseminationByServiceProvider()'><b>addInseminationByServiceProvider</b><br>Test class: com.nitara.InseminationManagement.AddInseminationByServiceProvider</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.InseminationManagement.AddInseminationByServiceProvider@63611043</td></tr>
+<tr>
+<td title='com.nitara.Treatment.AddTreatment.addTreatment()'><b>addTreatment</b><br>Test class: com.nitara.Treatment.AddTreatment</td>
+<td></td>
+<td>1</td>
+<td>com.nitara.Treatment.AddTreatment@16eccb2e</td></tr>
+<tr>
+<td title='com.nitara.UserPreferenceManagement.SetUserBreedingPreferences.SetBreedingPreferences()'><b>SetBreedingPreferences</b><br>Test class: com.nitara.UserPreferenceManagement.SetUserBreedingPreferences</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.UserPreferenceManagement.SetUserBreedingPreferences@7357a011</td></tr>
+<tr>
+<td title='com.nitara.KYCManagement.GetKycVerificationStatus.getKycVerificationStatus()'><b>getKycVerificationStatus</b><br>Test class: com.nitara.KYCManagement.GetKycVerificationStatus</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.KYCManagement.GetKycVerificationStatus@75d2da2d</td></tr>
+<tr>
+<td title='com.nitara.UserPreferenceManagement.GetUserServicesPreferences.getUserServicesPreferences()'><b>getUserServicesPreferences</b><br>Test class: com.nitara.UserPreferenceManagement.GetUserServicesPreferences</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.UserPreferenceManagement.GetUserServicesPreferences@327af41b</td></tr>
+<tr>
+<td title='com.nitara.AccountManagement.ViewFarmerHomePage.viewFarmerHomePage()'><b>viewFarmerHomePage</b><br>Test class: com.nitara.AccountManagement.ViewFarmerHomePage</td>
+<td></td>
+<td>1</td>
+<td>com.nitara.AccountManagement.ViewFarmerHomePage@768fc0f2</td></tr>
+<tr>
+<td title='com.nitara.DryPeriodManagement.UpdateDryPeriod.addDryPeriod()'><b>addDryPeriod</b><br>Test class: com.nitara.DryPeriodManagement.UpdateDryPeriod</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.DryPeriodManagement.UpdateDryPeriod@60410cd</td></tr>
+<tr>
+<td title='com.nitara.FarmManagement.AddExpenseCategories.addExpenseCategories()'><b>addExpenseCategories</b><br>Test class: com.nitara.FarmManagement.AddExpenseCategories</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.FarmManagement.AddExpenseCategories@44c73c26</td></tr>
+<tr>
+<td title='com.nitara.WeightManagement.UpdateWeight.updateWeight()'><b>updateWeight</b><br>Test class: com.nitara.WeightManagement.UpdateWeight</td>
+<td></td>
+<td>1</td>
+<td>com.nitara.WeightManagement.UpdateWeight@3e6104fc</td></tr>
+<tr>
+<td title='com.nitara.UserLogin.LoginWithOtp.loginWithOtp()'><b>loginWithOtp</b><br>Test class: com.nitara.UserLogin.LoginWithOtp</td>
+<td></td>
+<td>0</td>
+<td>com.nitara.UserLogin.LoginWithOtp@73a8da0f</td></tr>
+</table><p>
+<table width='100%' border='1' class='invocation-skipped'>
+<tr><td colspan='4' align='center'><b>SKIPPED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='com.nitara.MasterData.GetUnitMasterData.GetUnitMasterDataInEnglish()'><b>GetUnitMasterDataInEnglish</b><br>Test class: com.nitara.MasterData.GetUnitMasterData</td>
+<td><div><pre>io.restassured.path.json.exception.JsonPathException: Failed to parse the JSON document
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:930)
+	at io.restassured.path.json.JsonPath$4.doParseWith(JsonPath.java:895)
+	at io.restassured.path.json.JsonPath$JsonParser.parseWith(JsonPath.java:975)
+	at io.restassured.path.json.JsonPath.get(JsonPath.java:201)
+	at com.nitara.base.GenericBase.getUserAuthenticationToken(GenericBase.java:84)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: groovy.json.JsonException: Lexing failed on line: 1, column: 1, while reading &apos;D&apos;, no possible valid JSON value or punctuation could be recognized.
+	at groovy.json.JsonLexer.nextToken(JsonLexer.java:83)
+	at groovy.json.JsonLexer$nextToken.call(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parse(ConfigurableJsonSlurper.groovy:97)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper$parse.callCurrent(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parseText(ConfigurableJsonSlurper.groovy:83)
+	at io.restassured.path.json.JsonPath$4$1.method(JsonPath.java:893)
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:928)
+	... 36 more
+... Removed 31 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace121245483", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace121245483'><pre>io.restassured.path.json.exception.JsonPathException: Failed to parse the JSON document
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:930)
+	at io.restassured.path.json.JsonPath$4.doParseWith(JsonPath.java:895)
+	at io.restassured.path.json.JsonPath$JsonParser.parseWith(JsonPath.java:975)
+	at io.restassured.path.json.JsonPath.get(JsonPath.java:201)
+	at com.nitara.base.GenericBase.getUserAuthenticationToken(GenericBase.java:84)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+	at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:62)
+	at org.testng.internal.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:385)
+	at org.testng.internal.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:321)
+	at org.testng.internal.TestInvoker.runConfigMethods(TestInvoker.java:700)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:527)
+	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:794)
+	at org.testng.TestRunner.run(TestRunner.java:596)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+	at org.testng.TestNG.runSuites(TestNG.java:1063)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: groovy.json.JsonException: Lexing failed on line: 1, column: 1, while reading &apos;D&apos;, no possible valid JSON value or punctuation could be recognized.
+	at groovy.json.JsonLexer.nextToken(JsonLexer.java:83)
+	at groovy.json.JsonLexer$nextToken.call(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parse(ConfigurableJsonSlurper.groovy:97)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper$parse.callCurrent(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parseText(ConfigurableJsonSlurper.groovy:83)
+	at io.restassured.path.json.JsonPath$4$1.method(JsonPath.java:893)
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:928)
+	... 36 more
+</pre></div></td>
+<td>0</td>
+<td>com.nitara.MasterData.GetUnitMasterData@67b9b51a</td></tr>
+<tr>
+<td title='com.nitara.AccountManagement.GetActivityHistory.getActivityHistory()'><b>getActivityHistory</b><br>Test class: com.nitara.AccountManagement.GetActivityHistory</td>
+<td><div><pre>io.restassured.path.json.exception.JsonPathException: Failed to parse the JSON document
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:930)
+	at io.restassured.path.json.JsonPath$4.doParseWith(JsonPath.java:895)
+	at io.restassured.path.json.JsonPath$JsonParser.parseWith(JsonPath.java:975)
+	at io.restassured.path.json.JsonPath.get(JsonPath.java:201)
+	at com.nitara.base.GenericBase.getUserAuthenticationToken(GenericBase.java:84)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: groovy.json.JsonException: Lexing failed on line: 1, column: 1, while reading &apos;D&apos;, no possible valid JSON value or punctuation could be recognized.
+	at groovy.json.JsonLexer.nextToken(JsonLexer.java:83)
+	at groovy.json.JsonLexer$nextToken.call(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parse(ConfigurableJsonSlurper.groovy:97)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper$parse.callCurrent(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parseText(ConfigurableJsonSlurper.groovy:83)
+	at io.restassured.path.json.JsonPath$4$1.method(JsonPath.java:893)
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:928)
+	... 35 more
+... Removed 30 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace2120404899", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace2120404899'><pre>io.restassured.path.json.exception.JsonPathException: Failed to parse the JSON document
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:930)
+	at io.restassured.path.json.JsonPath$4.doParseWith(JsonPath.java:895)
+	at io.restassured.path.json.JsonPath$JsonParser.parseWith(JsonPath.java:975)
+	at io.restassured.path.json.JsonPath.get(JsonPath.java:201)
+	at com.nitara.base.GenericBase.getUserAuthenticationToken(GenericBase.java:84)
+	at jdk.internal.reflect.GeneratedMethodAccessor130.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+	at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:62)
+	at org.testng.internal.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:385)
+	at org.testng.internal.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:321)
+	at org.testng.internal.TestInvoker.runConfigMethods(TestInvoker.java:700)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:527)
+	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:794)
+	at org.testng.TestRunner.run(TestRunner.java:596)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+	at org.testng.TestNG.runSuites(TestNG.java:1063)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: groovy.json.JsonException: Lexing failed on line: 1, column: 1, while reading &apos;D&apos;, no possible valid JSON value or punctuation could be recognized.
+	at groovy.json.JsonLexer.nextToken(JsonLexer.java:83)
+	at groovy.json.JsonLexer$nextToken.call(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parse(ConfigurableJsonSlurper.groovy:97)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper$parse.callCurrent(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parseText(ConfigurableJsonSlurper.groovy:83)
+	at io.restassured.path.json.JsonPath$4$1.method(JsonPath.java:893)
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:928)
+	... 35 more
+</pre></div></td>
+<td>0</td>
+<td>com.nitara.AccountManagement.GetActivityHistory@563e4951</td></tr>
+<tr>
+<td title='com.nitara.UserPreferenceManagement.GetUserInsurancePreferences.getUserInsurancePreferences()'><b>getUserInsurancePreferences</b><br>Test class: com.nitara.UserPreferenceManagement.GetUserInsurancePreferences</td>
+<td><div><pre>io.restassured.path.json.exception.JsonPathException: Failed to parse the JSON document
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:930)
+	at io.restassured.path.json.JsonPath$4.doParseWith(JsonPath.java:895)
+	at io.restassured.path.json.JsonPath$JsonParser.parseWith(JsonPath.java:975)
+	at io.restassured.path.json.JsonPath.get(JsonPath.java:201)
+	at com.nitara.base.GenericBase.getUserAuthenticationToken(GenericBase.java:84)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: groovy.json.JsonException: Lexing failed on line: 1, column: 1, while reading &apos;D&apos;, no possible valid JSON value or punctuation could be recognized.
+	at groovy.json.JsonLexer.nextToken(JsonLexer.java:83)
+	at groovy.json.JsonLexer$nextToken.call(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parse(ConfigurableJsonSlurper.groovy:97)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper$parse.callCurrent(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parseText(ConfigurableJsonSlurper.groovy:83)
+	at io.restassured.path.json.JsonPath$4$1.method(JsonPath.java:893)
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:928)
+	... 35 more
+... Removed 30 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace566039179", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace566039179'><pre>io.restassured.path.json.exception.JsonPathException: Failed to parse the JSON document
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:930)
+	at io.restassured.path.json.JsonPath$4.doParseWith(JsonPath.java:895)
+	at io.restassured.path.json.JsonPath$JsonParser.parseWith(JsonPath.java:975)
+	at io.restassured.path.json.JsonPath.get(JsonPath.java:201)
+	at com.nitara.base.GenericBase.getUserAuthenticationToken(GenericBase.java:84)
+	at jdk.internal.reflect.GeneratedMethodAccessor130.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+	at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:62)
+	at org.testng.internal.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:385)
+	at org.testng.internal.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:321)
+	at org.testng.internal.TestInvoker.runConfigMethods(TestInvoker.java:700)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:527)
+	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:794)
+	at org.testng.TestRunner.run(TestRunner.java:596)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+	at org.testng.TestNG.runSuites(TestNG.java:1063)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: groovy.json.JsonException: Lexing failed on line: 1, column: 1, while reading &apos;D&apos;, no possible valid JSON value or punctuation could be recognized.
+	at groovy.json.JsonLexer.nextToken(JsonLexer.java:83)
+	at groovy.json.JsonLexer$nextToken.call(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parse(ConfigurableJsonSlurper.groovy:97)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper$parse.callCurrent(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parseText(ConfigurableJsonSlurper.groovy:83)
+	at io.restassured.path.json.JsonPath$4$1.method(JsonPath.java:893)
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:928)
+	... 35 more
+</pre></div></td>
+<td>0</td>
+<td>com.nitara.UserPreferenceManagement.GetUserInsurancePreferences@1a72a540</td></tr>
+<tr>
+<td title='com.nitara.UserPreferenceManagement.SetUserMilkingPreferences.setUserMilkingPreferences()'><b>setUserMilkingPreferences</b><br>Test class: com.nitara.UserPreferenceManagement.SetUserMilkingPreferences</td>
+<td><div><pre>io.restassured.path.json.exception.JsonPathException: Failed to parse the JSON document
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:930)
+	at io.restassured.path.json.JsonPath$4.doParseWith(JsonPath.java:895)
+	at io.restassured.path.json.JsonPath$JsonParser.parseWith(JsonPath.java:975)
+	at io.restassured.path.json.JsonPath.get(JsonPath.java:201)
+	at com.nitara.base.GenericBase.getUserAuthenticationToken(GenericBase.java:84)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: groovy.json.JsonException: Lexing failed on line: 1, column: 1, while reading &apos;D&apos;, no possible valid JSON value or punctuation could be recognized.
+	at groovy.json.JsonLexer.nextToken(JsonLexer.java:83)
+	at groovy.json.JsonLexer$nextToken.call(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parse(ConfigurableJsonSlurper.groovy:97)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper$parse.callCurrent(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parseText(ConfigurableJsonSlurper.groovy:83)
+	at io.restassured.path.json.JsonPath$4$1.method(JsonPath.java:893)
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:928)
+	... 35 more
+... Removed 30 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1923232046", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1923232046'><pre>io.restassured.path.json.exception.JsonPathException: Failed to parse the JSON document
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:930)
+	at io.restassured.path.json.JsonPath$4.doParseWith(JsonPath.java:895)
+	at io.restassured.path.json.JsonPath$JsonParser.parseWith(JsonPath.java:975)
+	at io.restassured.path.json.JsonPath.get(JsonPath.java:201)
+	at com.nitara.base.GenericBase.getUserAuthenticationToken(GenericBase.java:84)
+	at jdk.internal.reflect.GeneratedMethodAccessor130.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+	at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:62)
+	at org.testng.internal.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:385)
+	at org.testng.internal.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:321)
+	at org.testng.internal.TestInvoker.runConfigMethods(TestInvoker.java:700)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:527)
+	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:794)
+	at org.testng.TestRunner.run(TestRunner.java:596)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+	at org.testng.TestNG.runSuites(TestNG.java:1063)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: groovy.json.JsonException: Lexing failed on line: 1, column: 1, while reading &apos;D&apos;, no possible valid JSON value or punctuation could be recognized.
+	at groovy.json.JsonLexer.nextToken(JsonLexer.java:83)
+	at groovy.json.JsonLexer$nextToken.call(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parse(ConfigurableJsonSlurper.groovy:97)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper$parse.callCurrent(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parseText(ConfigurableJsonSlurper.groovy:83)
+	at io.restassured.path.json.JsonPath$4$1.method(JsonPath.java:893)
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:928)
+	... 35 more
+</pre></div></td>
+<td>0</td>
+<td>com.nitara.UserPreferenceManagement.SetUserMilkingPreferences@2812b107</td></tr>
+<tr>
+<td title='com.nitara.UserPreferenceManagement.GetUserHealthPreferences.getUserHealthPreferences()'><b>getUserHealthPreferences</b><br>Test class: com.nitara.UserPreferenceManagement.GetUserHealthPreferences</td>
+<td><div><pre>io.restassured.path.json.exception.JsonPathException: Failed to parse the JSON document
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:930)
+	at io.restassured.path.json.JsonPath$4.doParseWith(JsonPath.java:895)
+	at io.restassured.path.json.JsonPath$JsonParser.parseWith(JsonPath.java:975)
+	at io.restassured.path.json.JsonPath.get(JsonPath.java:201)
+	at com.nitara.base.GenericBase.getUserAuthenticationToken(GenericBase.java:84)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: groovy.json.JsonException: Lexing failed on line: 1, column: 1, while reading &apos;D&apos;, no possible valid JSON value or punctuation could be recognized.
+	at groovy.json.JsonLexer.nextToken(JsonLexer.java:83)
+	at groovy.json.JsonLexer$nextToken.call(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parse(ConfigurableJsonSlurper.groovy:97)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper$parse.callCurrent(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parseText(ConfigurableJsonSlurper.groovy:83)
+	at io.restassured.path.json.JsonPath$4$1.method(JsonPath.java:893)
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:928)
+	... 35 more
+... Removed 30 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace706960270", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace706960270'><pre>io.restassured.path.json.exception.JsonPathException: Failed to parse the JSON document
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:930)
+	at io.restassured.path.json.JsonPath$4.doParseWith(JsonPath.java:895)
+	at io.restassured.path.json.JsonPath$JsonParser.parseWith(JsonPath.java:975)
+	at io.restassured.path.json.JsonPath.get(JsonPath.java:201)
+	at com.nitara.base.GenericBase.getUserAuthenticationToken(GenericBase.java:84)
+	at jdk.internal.reflect.GeneratedMethodAccessor130.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+	at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:62)
+	at org.testng.internal.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:385)
+	at org.testng.internal.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:321)
+	at org.testng.internal.TestInvoker.runConfigMethods(TestInvoker.java:700)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:527)
+	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:794)
+	at org.testng.TestRunner.run(TestRunner.java:596)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+	at org.testng.TestNG.runSuites(TestNG.java:1063)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: groovy.json.JsonException: Lexing failed on line: 1, column: 1, while reading &apos;D&apos;, no possible valid JSON value or punctuation could be recognized.
+	at groovy.json.JsonLexer.nextToken(JsonLexer.java:83)
+	at groovy.json.JsonLexer$nextToken.call(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parse(ConfigurableJsonSlurper.groovy:97)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper$parse.callCurrent(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parseText(ConfigurableJsonSlurper.groovy:83)
+	at io.restassured.path.json.JsonPath$4$1.method(JsonPath.java:893)
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:928)
+	... 35 more
+</pre></div></td>
+<td>0</td>
+<td>com.nitara.UserPreferenceManagement.GetUserHealthPreferences@2931522b</td></tr>
+<tr>
+<td title='com.nitara.UserPreferenceManagement.SetUserServicesPreferences.SetServicesPreferences()'><b>SetServicesPreferences</b><br>Test class: com.nitara.UserPreferenceManagement.SetUserServicesPreferences</td>
+<td><div><pre>io.restassured.path.json.exception.JsonPathException: Failed to parse the JSON document
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:930)
+	at io.restassured.path.json.JsonPath$4.doParseWith(JsonPath.java:895)
+	at io.restassured.path.json.JsonPath$JsonParser.parseWith(JsonPath.java:975)
+	at io.restassured.path.json.JsonPath.get(JsonPath.java:201)
+	at com.nitara.base.GenericBase.getUserAuthenticationToken(GenericBase.java:84)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: groovy.json.JsonException: Lexing failed on line: 1, column: 1, while reading &apos;D&apos;, no possible valid JSON value or punctuation could be recognized.
+	at groovy.json.JsonLexer.nextToken(JsonLexer.java:83)
+	at groovy.json.JsonLexer$nextToken.call(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parse(ConfigurableJsonSlurper.groovy:97)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper$parse.callCurrent(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parseText(ConfigurableJsonSlurper.groovy:83)
+	at io.restassured.path.json.JsonPath$4$1.method(JsonPath.java:893)
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:928)
+	... 35 more
+... Removed 30 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace124581953", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace124581953'><pre>io.restassured.path.json.exception.JsonPathException: Failed to parse the JSON document
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:930)
+	at io.restassured.path.json.JsonPath$4.doParseWith(JsonPath.java:895)
+	at io.restassured.path.json.JsonPath$JsonParser.parseWith(JsonPath.java:975)
+	at io.restassured.path.json.JsonPath.get(JsonPath.java:201)
+	at com.nitara.base.GenericBase.getUserAuthenticationToken(GenericBase.java:84)
+	at jdk.internal.reflect.GeneratedMethodAccessor130.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+	at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:62)
+	at org.testng.internal.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:385)
+	at org.testng.internal.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:321)
+	at org.testng.internal.TestInvoker.runConfigMethods(TestInvoker.java:700)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:527)
+	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:794)
+	at org.testng.TestRunner.run(TestRunner.java:596)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+	at org.testng.TestNG.runSuites(TestNG.java:1063)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: groovy.json.JsonException: Lexing failed on line: 1, column: 1, while reading &apos;D&apos;, no possible valid JSON value or punctuation could be recognized.
+	at groovy.json.JsonLexer.nextToken(JsonLexer.java:83)
+	at groovy.json.JsonLexer$nextToken.call(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parse(ConfigurableJsonSlurper.groovy:97)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper$parse.callCurrent(Unknown Source)
+	at io.restassured.internal.path.json.ConfigurableJsonSlurper.parseText(ConfigurableJsonSlurper.groovy:83)
+	at io.restassured.path.json.JsonPath$4$1.method(JsonPath.java:893)
+	at io.restassured.path.json.JsonPath$ExceptionCatcher.invoke(JsonPath.java:928)
+	... 35 more
+</pre></div></td>
+<td>0</td>
+<td>com.nitara.UserPreferenceManagement.SetUserServicesPreferences@f99f5e0</td></tr>
+</table><p>
+</body>
+</html>

@@ -1,0 +1,348 @@
+package com.nitara.HeatManagement;
+
+
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import com.nitara.CalvingManagement.AddCalving;
+import com.nitara.CattleDetails.ViewCattleBreedingActivity;
+import com.nitara.CattleRegistration.RegisterMilkingOrDryCattle;
+import com.nitara.InseminationManagement.AddInsemination;
+import com.nitara.PDManagement.AddPD;
+import com.nitara.base.GenericBase;
+import com.nitara.utilities.ExcelUtils;
+import com.nitara.utilities.Helper;
+
+import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+
+public class AddHeat extends GenericBase{
+
+	@Test(groups= {"Smoke"})
+	public void AddHeatData() throws Exception {
+
+		String abstractname = prop.getProperty("AddHeat"); //
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String filepath = prop.getProperty("CattleBreedingData");
+
+
+
+		RequestSpecification request = RestAssured.given();
+
+		//Read from excel to JSONObject
+		ExcelUtils data = new ExcelUtils();
+		JSONObject requestParams = data.readCase("AddHeat","AddHeatwithValidData",filepath);
+		System.out.println(requestParams);
+
+		Response response = request.body(requestParams.toString())
+				.header("Content-Type", "application/json")
+				.header("Authorization","Bearer " + token)
+				.post(abstractname);
+
+		//Print response
+		response.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals(response.getStatusCode(),200);
+
+
+		//Validate success message
+		String jsonString = response.asString();
+		String  message = JsonPath.from(jsonString).get("message");
+		Assert.assertEquals(message,"Heat data added Successfully.");
+
+		//Assert the updated changes
+		ViewCattleBreedingActivity cattle = new ViewCattleBreedingActivity();
+		JSONObject lactation = data.readRowField("GeneralData","Lactation",filepath);
+		String viewDetails = cattle.viewCattleBreedingActivity(requestParams.getString("CattleId"),lactation.getInt("Lactation"),token); 
+
+		//Parse JSON response
+		JSONObject cattleDetails = new JSONObject(viewDetails);
+		JSONObject cattleMilkingData = cattleDetails.getJSONObject("cattleMilkingData");
+		JSONArray breedingActivities = cattleMilkingData.getJSONArray("breedingActivities");
+		JSONObject activity = breedingActivities.getJSONObject(breedingActivities.length()-1);
+		Assert.assertEquals("Heat",activity.getString("activity"));
+		Assert.assertEquals(requestParams.getString("heatType"),activity.getString("heatType"));
+		String date = requestParams.getString("heatDateTime");
+		Assert.assertEquals(activity.getString("date").contains(date),true);
+
+	}
+
+
+	public void addHeatData(String token) throws Exception {
+
+		String abstractname = prop.getProperty("AddHeat"); //
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String filepath = prop.getProperty("CattleBreedingData");
+
+
+
+		RequestSpecification request = RestAssured.given();
+
+
+		RegisterMilkingOrDryCattle cat = new RegisterMilkingOrDryCattle();
+		cat.registerMilkingOrDryCattle();
+
+		//Read from excel to JSONObject
+		ExcelUtils data = new ExcelUtils();
+		JSONObject requestParams = data.readCase("AddHeat","AddHeatwithValidData",filepath);
+		System.out.println(requestParams);
+
+		Response response = request.body(requestParams.toString())
+				.header("Content-Type", "application/json")
+				.header("Authorization","Bearer " + token)
+				.post(abstractname);
+
+		//Print response
+		response.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals(response.getStatusCode(),200);
+
+
+		//Validate success message
+		String jsonString = response.asString();
+		String  message = JsonPath.from(jsonString).get("message");
+		Assert.assertEquals(message,"Heat data added Successfully.");
+
+		//Assert the updated changes
+		ViewCattleBreedingActivity cattle = new ViewCattleBreedingActivity();
+		JSONObject lactation = data.readRowField("GeneralData","Lactation",filepath);
+		String viewDetails = cattle.viewCattleBreedingActivity(requestParams.getString("CattleId"),lactation.getInt("Lactation"),token); 
+
+		//Parse JSON response
+		JSONObject cattleDetails = new JSONObject(viewDetails);
+		JSONObject cattleMilkingData = cattleDetails.getJSONObject("cattleMilkingData");
+		JSONArray breedingActivities = cattleMilkingData.getJSONArray("breedingActivities");
+		JSONObject activity = breedingActivities.getJSONObject(breedingActivities.length()-1);
+		Assert.assertEquals("Heat",activity.getString("activity"));
+		Assert.assertEquals(requestParams.getString("heatType"),activity.getString("heatType"));
+		String date = requestParams.getString("heatDateTime");
+		Assert.assertEquals(activity.getString("date").contains(date),true);
+
+	}
+
+	@Test(groups= {"Regression"})
+	public void addNewHeatDataWithin14DaysofHeat() throws Exception {
+
+		String abstractname = prop.getProperty("AddHeat"); //
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String filepath = prop.getProperty("CattleBreedingData");
+
+
+		RequestSpecification request = RestAssured.given();
+
+		RegisterMilkingOrDryCattle cat = new RegisterMilkingOrDryCattle();
+		cat.registerMilkingOrDryCattle();
+
+		//Read from excel to JSONObject
+		ExcelUtils data = new ExcelUtils();
+		JSONObject requestParams = data.readCase("AddHeat","AddHeat",filepath);
+		System.out.println(requestParams);
+
+		Helper date = new Helper();
+		requestParams.put("heatDateTime", date.getDate(-13));
+
+
+		Response response = request.body(requestParams.toString())
+				.header("Content-Type", "application/json")
+				.header("Authorization","Bearer " + token)
+				.post(abstractname);
+
+		requestParams.put("heatDateTime", date.getDate(-10));
+
+
+		response = request.body(requestParams.toString())
+				.header("Content-Type", "application/json")
+				.header("Authorization","Bearer " + token)
+				.post(abstractname);
+
+		//Print response
+		response.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals(response.getStatusCode(),400);
+
+		//Validate success message
+		String jsonString = response.asString();
+		String  message = JsonPath.from(jsonString).get("message");
+		Assert.assertEquals(message,"Heat date can not be recorded within 14 days of last recorded heat.");
+
+
+
+
+	}
+
+
+	@Test(groups= {"Regression"})
+	public void AddHeatDataWithFutureDate() throws Exception {
+
+		String abstractname = prop.getProperty("AddHeat"); //
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String filepath = prop.getProperty("CattleBreedingData");
+
+
+		RequestSpecification request = RestAssured.given();
+
+		//Read from excel to JSONObject
+		ExcelUtils data = new ExcelUtils();
+		JSONObject requestParams = data.readCase("AddHeat","AddHeat",filepath);
+		System.out.println(requestParams);
+
+		Helper date = new Helper();
+
+		requestParams.put("heatDateTime", date.getDate(2));
+
+		Response response = request.body(requestParams.toString())
+				.header("Content-Type", "application/json")
+				.header("Authorization","Bearer " + token)
+				.post(abstractname);
+
+		//Print response
+		response.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals( response.getStatusCode(),400);
+
+
+		///Assert error message
+		String jsonString = response.asString(); 
+		JSONObject res = new JSONObject(jsonString);
+		JSONObject error = res.getJSONObject("errors");
+
+
+		JSONArray obj = error.getJSONArray( "HeatDateTime");
+		Assert.assertEquals( obj.getString(0).contains("must not be greater than today"),true);
+
+	}
+
+
+	@Test(groups= {"Regression"})
+	public void addNewHeatDataAfterPregnantPDResult() throws Exception {
+
+		String abstractname = prop.getProperty("AddHeat"); //
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String filepath = prop.getProperty("CattleBreedingData");
+
+
+		RequestSpecification request = RestAssured.given();
+
+		//Read from excel to JSONObject
+		ExcelUtils data = new ExcelUtils();
+		JSONObject requestParams = data.readCase("AddHeat","AddHeat",filepath);
+		System.out.println(requestParams);
+
+		RegisterMilkingOrDryCattle cat = new RegisterMilkingOrDryCattle();
+		cat.registerMilkingOrDryCattle();
+
+		Helper date = new Helper();
+
+		AddInsemination in = new AddInsemination();
+		String InsemDate =  date.getDate(-23);
+		
+
+		AddPD pd = new AddPD();
+		String PDdate = date.getDate(-2);
+		pd.addPD(true, PDdate, token);
+
+
+		requestParams.put("heatDateTime", date.getDate(-1));
+
+		Response response = request.body(requestParams.toString())
+				.header("Content-Type", "application/json")
+				.header("Authorization","Bearer " + token)
+				.post(abstractname);
+
+		//Print response
+		response.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals( response.getStatusCode(),200);
+
+		//Validate success message
+		String jsonString = response.asString();
+		String  message = JsonPath.from(jsonString).get("message");
+		Assert.assertEquals(message,"Heat data added Successfully.");
+
+		//Assert the updated changes
+		ViewCattleBreedingActivity cattle = new ViewCattleBreedingActivity();
+		String viewDetails = cattle.viewCattleBreedingActivity(requestParams.getString("CattleId"),1,token);
+
+		JSONObject cattleDetails = new JSONObject(viewDetails);
+		JSONObject cattleMilkingData = cattleDetails.getJSONObject("cattleMilkingData");
+		JSONArray breedingActivities = cattleMilkingData.getJSONArray("breedingActivities");
+		JSONObject activity = breedingActivities.getJSONObject(breedingActivities.length()-2);
+
+		Assert.assertEquals("Not Pregnant",activity.getString("pdResult"));
+
+
+
+
+
+	}
+
+
+	@Test(groups= {"Regression"})
+	public void addNewHeatDataWithin15DaysofCalving() throws Exception {
+
+		String abstractname = prop.getProperty("AddHeat"); //
+		RestAssured.baseURI = prop.getProperty("baseurl");
+		String filepath = prop.getProperty("CattleBreedingData");
+
+
+		RequestSpecification request = RestAssured.given();
+
+		//Read from excel to JSONObject
+		ExcelUtils data = new ExcelUtils();
+
+
+		RegisterMilkingOrDryCattle cat = new RegisterMilkingOrDryCattle();
+		cat.registerMilkingOrDryCattle();
+
+		JSONObject requestParams = data.readCase("AddHeat","AddHeat",filepath);
+		System.out.println(requestParams);
+
+		Helper date = new Helper();
+
+		AddInsemination in = new AddInsemination();
+		String InsemDate =  date.getDate(-280);
+		in.AddInseminationData(InsemDate,token);
+
+		AddPD pd = new AddPD();
+		String PDdate = date.getDate(-250);
+		pd.addPD(true, PDdate, token);
+
+		AddCalving calving = new AddCalving();
+		String calvingdate = date.getDate(-10);
+		calving.addCalvingData(token, calvingdate);
+
+		requestParams.put("heatDateTime", date.getDate(-1));
+
+		Response response = request.body(requestParams.toString())
+				.header("Content-Type", "application/json")
+				.header("Authorization","Bearer " + token)
+				.post(abstractname);
+
+		//Print response
+		response.prettyPeek();
+
+		//Validate status code
+		Assert.assertEquals( response.getStatusCode(),400);
+
+
+		//Validate error message
+		String jsonString = response.asString();
+		String  message = JsonPath.from(jsonString).get("message");
+		Assert.assertEquals("Heat Date cannot be recorded within 15 days of last Calving Date.", message);
+
+
+	}
+
+
+
+}
