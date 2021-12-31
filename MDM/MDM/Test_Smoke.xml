@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Test-Smoke">
+<parameter name="url" value="http://integration.nitara.co.in" />
+<parameter name="farm" value="4e14a4c0-ac0f-4b8c-8de7-8d620f5d1097" />
+<test name="Test-Smoke" preserve-order="true"> 
+<groups>  
+<run>  
+<include name="Smoke"/>  
+</run>  
+</groups> 
+   <classes>
+<class name="com.nitara.AccountManagement.RegisterFarm"/>
+<class name="com.nitara.PermissionManagement.GetAllUsersAndRoles"/>
+<class name="com.nitara.AccountManagement.GetActivityHistory"/>
+<class name="com.nitara.AccountManagement.GetAllLoggedInDevices"/>
+<class name="com.nitara.AccountManagement.GetUserRoles"/>
+<class name="com.nitara.UserPreferenceManagement.GetUserMilkingPreferences"/>
+<class name="com.nitara.UserPreferenceManagement.SetUserMilkingPreferences"/>
+<class name="com.nitara.UserPreferenceManagement.GetUserInsurancePreferences"/>
+<class name="com.nitara.UserPreferenceManagement.SetUserInsurancePreferences"/>
+<class name="com.nitara.UserPreferenceManagement.GetUserHealthPreferences"/>
+<class name="com.nitara.UserPreferenceManagement.SetUserHealthPreferences"/>
+<class name="com.nitara.UserPreferenceManagement.GetUserServicesPreferences"/>
+<class name="com.nitara.UserPreferenceManagement.SetUserServicesPreferences"/>
+<class name="com.nitara.UserPreferenceManagement.GetUserBreedingPreferences"/>
+<class name="com.nitara.UserPreferenceManagement.SetUserBreedingPreferences"/>
+<class name="com.nitara.PermissionManagement.AddNewUser"/>
+<class name="com.nitara.PermissionManagement.GetUserDetails"/>
+<class name="com.nitara.PermissionManagement.UpdateUserDetails"/>
+<class name="com.nitara.AccountManagement.UpdateUserProfile"/>
+<class name="com.nitara.UserLogin.GenerateOtpForLogin"/>
+<class name="com.nitara.AccountManagement.RemoveProfilePic"/>
+<class name="com.nitara.AccountManagement.UpdateProfilePic"/>
+<class name="com.nitara.AccountManagement.ViewProfilePic"/>
+<class name="com.nitara.UserLogin.ChangePassword"/>
+<class name="com.nitara.UserLogin.ForgotPassword"/>
+<class name="com.nitara.UserLogin.ResendOTP"/>
+<class name="com.nitara.UserLogin.ResendVoiceOTP"/>
+<class name="com.nitara.UserLogin.Logout"/>
+<class name="com.nitara.CattleRegistration.RegisterMilkingOrDryCattle"/>
+<class name="com.nitara.CattleDetails.ViewCattleBreedingActivity"/>
+<class name="com.nitara.AccountManagement.ViewFarmerHomePage"/>
+<class name="com.nitara.HeatManagement.AddHeat"/>
+<class name="com.nitara.HeatManagement.UpdateHeat"/>
+<class name="com.nitara.HeatManagement.DeleteHeat"/>
+<class name="com.nitara.InseminationManagement.AddInsemination"/>
+<class name="com.nitara.InseminationManagement.UpdateInsemination"/>
+<class name="com.nitara.InseminationManagement.DeleteInsemination"/>
+<class name="com.nitara.InseminationManagement.AddInseminationByServiceProvider"/>
+<class name="com.nitara.PDManagement.AddPD"/>
+<class name="com.nitara.PDManagement.UpdatePD"/>
+<class name="com.nitara.PDManagement.DeletePD"/>
+<class name="com.nitara.DryPeriodManagement.AddDryPeriod"/>
+<class name="com.nitara.DryPeriodManagement.UpdateDryPeriod"/>
+<class name="com.nitara.DryPeriodManagement.DeleteDryPeriod"/>
+<class name="com.nitara.CalvingManagement.AddCalving"/>
+<class name="com.nitara.CattleRegistration.RegisterBullCattle"/>
+<class name="com.nitara.Treatment.AddTreatment"/>
+<class name="com.nitara.Treatment.UpdateTreatment"/>
+<class name="com.nitara.Treatment.ViewTreatmentData"/>
+<class name="com.nitara.FollowUp.AddFollowUp"/>
+<class name="com.nitara.FollowUp.UpdateFollowUp"/>
+<class name="com.nitara.FollowUp.DeleteFollowUp"/>
+<class name="com.nitara.Treatment.DeleteTreatment"/>
+<class name="com.nitara.VaccinationManagement.AddVaccination"/>
+<class name="com.nitara.VaccinationManagement.ViewVaccinationData"/>
+<class name="com.nitara.VaccinationManagement.DeleteVaccination"/>
+<class name="com.nitara.DewormingManagement.AddDeworming"/>
+<class name="com.nitara.DewormingManagement.UpdateDeworming"/>
+<class name="com.nitara.DewormingManagement.ViewDewormingData"/>
+<class name="com.nitara.DewormingManagement.DeleteDeworming"/>
+<class name="com.nitara.CattleManagement.UpdateCattleProfile"/>
+<class name="com.nitara.FarmManagement.ViewFarmCattleList"/>
+<class name="com.nitara.FarmManagement.ViewFarmAnalysis"/>
+<class name="com.nitara.CattleDetails.ViewCattleProfile"/>
+<class name="com.nitara.CattleDetails.ViewCattleAnalysis"/>
+<class name="com.nitara.CattleDetails.ViewAllCattlePhotos"/>
+<class name="com.nitara.CattleManagement.AddNewCattleProfilePics"/>
+<class name="com.nitara.CattleManagement.DeleteCattleProfilePic"/>
+<class name="com.nitara.CattleManagement.SearchCattle"/>
+<class name="com.nitara.FarmManagement.GetFarmMetadata"/>
+<class name="com.nitara.FarmManagement.SearchFarm"/>
+<class name="com.nitara.UserLogin.GenerateOtpForLogin"/>
+<class name="com.nitara.PermissionManagement.RemoveUser"/>
+<class name="com.nitara.MasterData.GetAllMasterData"/>
+<class name="com.nitara.DiseasePredictor.GetAllDiseases"/>
+<class name="com.nitara.DiseasePredictor.GetAllSymptoms"/>
+<class name="com.nitara.DiseasePredictor.GetCategories"/>
+<class name="com.nitara.DiseasePredictor.GetDiseases"/>
+<class name="com.nitara.DiseasePredictor.GetPreventions"/>
+<class name="com.nitara.DiseasePredictor.GetSymptoms"/>
+<class name="com.nitara.DiseasePredictor.GetTreatments"/>
+<class name="com.nitara.DiseasePredictor.ReportDisease"/>
+<class name="com.nitara.CattleManagement.RemoveCattle"/>
+<class name="com.nitara.MilkingManagement.AddCattleMilking"/>
+<class name="com.nitara.MilkingManagement.AddFarmMilking"/>
+<class name="com.nitara.MilkingManagement.FarmWiseCattleMilking"/>
+<class name="com.nitara.MilkingManagement.FarmWiseFarmMilking"/>
+<class name="com.nitara.CattleManagement.RemoveCattle"/>
+<class name="com.nitara.BCSManagement.AddBcs"/>
+<class name="com.nitara.BCSManagement.DeleteBcs"/>
+<class name="com.nitara.BCSManagement.UpdateBcs"/>
+<class name="com.nitara.BCSManagement.ViewBcsData"/>
+<class name="com.nitara.WeightManagement.AddWeightByGirth"/>
+<class name="com.nitara.WeightManagement.AddWeightDirect"/>
+<class name="com.nitara.WeightManagement.DeleteWeight"/>
+<class name="com.nitara.WeightManagement.UpdateWeight"/>
+<class name="com.nitara.WeightManagement.ViewWeightData"/>
+<class name="com.nitara.ServiceProvider.UpcomingActivity"/>
+</classes>
+ </test> <!-- Test -->
+</suite> <!-- Suite -->
+

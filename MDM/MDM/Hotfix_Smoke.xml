@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Hotfix-Smoke">
+<parameter name="AccountManagement" value="src\\main\\java\\com\\nitara\\testdata\\CattleOtherActivities.xlsx" />
+<parameter name="url" value="http://live.nitara.co.in" />
+<parameter name="farm" value="6dac97b5-4aca-4ee9-a586-a74e9eeefac6" />
+<parameter name="B" value="RegisterHeifer" />
+<parameter name="C" value="RegisterMilking" />
+<test name="Hotfix-Smoke" preserve-order="true">
+
+   <classes>
+<class name="com.nitara.MasterData.GetAllMasterData"/>
+</classes>
+ </test> <!-- Test -->
+</suite> <!-- Suite -->
+
