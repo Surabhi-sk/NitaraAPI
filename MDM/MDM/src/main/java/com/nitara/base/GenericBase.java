@@ -49,45 +49,5 @@ public class GenericBase {
 	}
 
 
-@BeforeMethod(alwaysRun = true)
-	public void getUserAuthenticationToken() {
-
-		// Assigning base Url to the request
-		RestAssured.baseURI = prop.getProperty("baseurl");
-		String abstractname = prop.getProperty("UserLoginV2");
-		
-		RequestSpecification request = RestAssured.given();
-		JSONObject requestParams = new JSONObject();
-		requestParams.put("countryCode", "+91"); // Cast
-		requestParams.put("phone","6820748358");///Test
-		  //requestParams.put("phone","0525111526");
-		requestParams.put("Password", "password");
-		requestParams.put("deviceName", "DELL_PC"); 		 
-		requestParams.put("deviceType",  "LAPTOP");
-		requestParams.put("key",  "com.nitara.farmer");
-		//requestParams.put("key",  "com.nitara.serviceprovider");
-
-		request.body(requestParams.toString());
-
-		request.header("Content-Type", "application/json");
-
-		Response response = request.post(abstractname);
-
-		int  statusCode = response.getStatusCode();
-
-		System.out.println("The status code recieved: " + statusCode);
-
-		System.out.println("Response body: " + response.body().prettyPeek().asString());
-
-
-		String jsonString = response.asString();
-		String  message = JsonPath.from(jsonString).get("message");
-		//Validate success message
-		Assert.assertEquals("Logged in successfully.", message);
-
-		token = JsonPath.from(jsonString).get("token");
-
-
-	}
 
 }
