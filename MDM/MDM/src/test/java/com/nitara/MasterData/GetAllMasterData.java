@@ -39,7 +39,7 @@ public class GetAllMasterData extends GenericBase{
 		
 		JSONObject mData = new JSONObject(jsonString);
 		JSONObject data = mData.getJSONObject("data");
-		Assert.assertEquals(data.length(),22);
+		Assert.assertEquals(data.length(),25);
 
 	}
 
